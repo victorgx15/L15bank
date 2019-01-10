@@ -9,14 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RestController
+@Controller
 public class Greeting {
-    @RequestMapping(value="/Produits", method=RequestMethod.GET)
-    public String listeProduits() {
-        return "Un exemple de produit";
-    }
-    
-    @GetMapping("/hello")
+	@RequestMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "greeting";
