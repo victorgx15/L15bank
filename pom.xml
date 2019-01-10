@@ -49,6 +49,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+
+				<configuration>
+             <archive>
+               <manifest>
+					<mainClass>com.victor.antoine.L15.L15bank.L15bankApplication</mainClass>
+					<addClasspath>true</addClasspath>
+					<classpathPrefix>lib</classpathPrefix>
+               </manifest>
+             </archive>
+           </configuration>
+
 			</plugin>
 		</plugins>
 	</build>
