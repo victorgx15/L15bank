@@ -1,12 +1,19 @@
 package com.victor.antoine.L15.L15bank.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Personne {
-	static private int universalId = 1;
+	
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String nom, prenom, email;
 	
 	public Personne(String nom, String prenom, String email) {
-		this.id = universalId++;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;

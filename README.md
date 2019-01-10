@@ -14,3 +14,8 @@ https://spring.io/guides/gs/spring-boot/
 #### Pour Spring sur le web
 https://spring.io/guides/gs/securing-web/
 https://spring.io/guides/gs/serving-web-content/
+
+#### Spring database
+http://www.springboottutorial.com/spring-boot-and-h2-in-memory-database
+https://spring.io/guides/gs/accessing-data-jpa/
+http://localhost:8080/h2-console

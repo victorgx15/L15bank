@@ -1,7 +1,16 @@
 package com.victor.antoine.L15.L15bank.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Operation {
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
+    
     private String iban_source;
     private String iban_dest;
     private double value;
