@@ -54,7 +54,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.3.7.Final</version>
+		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
@@ -63,14 +70,14 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 
 				<configuration>
-             <archive>
-               <manifest>
-					<mainClass>com.victor.antoine.L15.L15bank.L15bankApplication</mainClass>
-					<addClasspath>true</addClasspath>
-					<classpathPrefix>lib</classpathPrefix>
-               </manifest>
-             </archive>
-           </configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.victor.antoine.L15.L15bank.L15bankApplication</mainClass>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
 
 			</plugin>
 		</plugins>
