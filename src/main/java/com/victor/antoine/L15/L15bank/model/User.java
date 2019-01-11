@@ -6,14 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Client {
+public class User {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String name, firstName, email;
 
-	public Client(String name, String firstName, String email) {
+    public User(String name, String firstName, String email) {
 		this.name = name;
 		this.firstName = firstName;
 		this.email = email;
