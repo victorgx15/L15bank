@@ -6,30 +6,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Personne {
+public class Client {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private String nom, prenom, email;
-	
-	public Personne(String nom, String prenom, String email) {
-		this.nom = nom;
-		this.prenom = prenom;
+	private String name, firstName, email;
+
+	public Client(String name, String firstName, String email) {
+		this.name = name;
+		this.firstName = firstName;
 		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return nom + " " + prenom;
+		return name + " " + firstName;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getEmail() {
