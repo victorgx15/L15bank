@@ -1,6 +1,5 @@
-com/victor/antoine/L15/L15bank/MvcConfig.class
-com/victor/antoine/L15/L15bank/model/Account.class
-com/victor/antoine/L15/L15bank/L15bankApplication.class
-com/victor/antoine/L15/L15bank/model/Personne.class
-com/victor/antoine/L15/L15bank/controller/Greeting.class
-com/victor/antoine/L15/L15bank/model/Operation.class
+com\victor\antoine\L15\L15bank\model\Account.class
+com\victor\antoine\L15\L15bank\model\Operation.class
+com\victor\antoine\L15\L15bank\MvcConfig.class
+com\victor\antoine\L15\L15bank\controller\Greeting.class
+com\victor\antoine\L15\L15bank\L15bankApplication.class
