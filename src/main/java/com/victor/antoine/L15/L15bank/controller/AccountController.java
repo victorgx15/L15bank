@@ -1,26 +1,13 @@
 package com.victor.antoine.L15.L15bank.controller;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.victor.antoine.L15.L15bank.model.Account;
-import com.victor.antoine.L15.L15bank.model.AccountForm;
 import com.victor.antoine.L15.L15bank.repository.AccountRepository;
 
 
@@ -45,14 +32,13 @@ public class AccountController {
     
     @RequestMapping(value = "/addAccount", method = RequestMethod.GET)
     public String showAddPersonPage(Model model) {
-        AccountForm accForm = new AccountForm();
-        model.addAttribute("accountForm", accForm);
+        model.addAttribute("account", new Account());
         return "addAccount";
     }
     
     @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
-    public String saAcc(Model model, @ModelAttribute("AccountFrom") AccountForm acEs) {
-        acc.save(new Account(acEs.getIban(), acEs.getType()));
+    public String saAcc(Model model, @ModelAttribute("Account") Account acE) {
+        acc.save(new Account(acE.getIban(), acE.getType()));
         return "redirect:/accounts_overview";
     }
 	

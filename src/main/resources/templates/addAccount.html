@@ -8,7 +8,7 @@
 	<h1>Welcome back </h1>
 
 <form th:action="@{/addAccount}"
-         th:object="${accountForm}" method="POST">
+         th:object="${account}" method="POST">
          IBAN:
          <input type="text" th:field="*{iban}" />    
          <br/>
