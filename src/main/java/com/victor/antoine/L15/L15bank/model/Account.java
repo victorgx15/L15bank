@@ -10,12 +10,6 @@ public class Account {
 	private @Id @GeneratedValue int id;
     private String iban, type;
     
-    public Account(int id, String iban, String type) {
-		this.id = id;
-		this.iban = iban;
-		this.type = type;
-	}
-    
     public Account(String iban, String type) {
 		this.iban = iban;
 		this.type = type;
