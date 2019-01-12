@@ -9,44 +9,30 @@ import javax.persistence.Id;
 public class Account {
 	
 	private @Id @GeneratedValue int id;
-    private String iban;
-    private int type;
+    private String iban, type;
     
-    public Account(int id, String iban, int type) {
+    public Account(int id, String iban, String type) {
 		this.id = id;
 		this.iban = iban;
 		this.type = type;
 	}
     
-    public Account() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getIban() {
-		return iban;
-	}
-
-	public void setIban(String iban) {
+    public Account(String iban, String type) {
 		this.iban = iban;
+		this.type = type;
 	}
-
-	public int getType() {
-		return type;
-	}
+    
+    public Account() { }
+	public int getId() { return id;	}
+	public void setId(int id) { this.id = id; }
+	public String getIban() { return iban; }
+	public void setIban(String iban) { this.iban = iban; }
+	public String getType() { return type; }
+	public void setType(String type) { this.type = type; }
 	
 	@Override
 	public String toString() {
 		return "Account [id=" + id + ", iban=" + iban + ", type=" + type + "]";
 	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
+	
 }

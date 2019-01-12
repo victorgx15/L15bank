@@ -1,3 +1,3 @@
-INSERT INTO account VALUES(1, 'FR562039' , 1);
-INSERT INTO account VALUES(2, 'FR4539' , 2);
-INSERT INTO account VALUES(3, 'FR89039' , 1);
+INSERT INTO Account(id,iban,type) VALUES	(10,'FR562039' , 'Counrat'),
+										(20,'FR4539' , 'Livret'),
+										(30,'FR89039' , 'LDD');

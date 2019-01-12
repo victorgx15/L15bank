@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>L15 - Accounts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Welcome back </h1>
+
+<form th:action="@{/addAccount}"
+         th:object="${accountForm}" method="POST">
+         IBAN:
+         <input type="text" th:field="*{iban}" />    
+         <br/>
+         Type de Compte:
+         <input type="text" th:field="*{type}" />     
+         <br/>
+         <input type="submit" value="Create" />
+      </form>
+
+</body>
+</html>
