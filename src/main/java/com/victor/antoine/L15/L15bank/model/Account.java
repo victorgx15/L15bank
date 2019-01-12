@@ -16,10 +16,15 @@ public class Account {
     private int type;
     
     public Account(int id, String iban, int type) {
-		super();
 		this.id = id;
 		this.iban = iban;
 		this.type = type;
+	}
+    
+    public Account() {
+		this.id = 1;
+		this.iban = "DE56";
+		this.type = 3;
 	}
 
 	public int getId() {

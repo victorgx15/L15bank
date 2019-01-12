@@ -1,6 +1,7 @@
 package com.victor.antoine.L15.L15bank.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class AccountController {
 
     //Récupérer un produit par son Id
     @GetMapping(value="/Accounts/{id}")
-    public Account displayAccount(@PathVariable int id) {
+    public Optional<Account> displayAccount(@PathVariable int id) {
     	return acc.findById(id);
     }
 	

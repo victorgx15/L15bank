@@ -1,3 +1,3 @@
-INSERT INTO account VALUES(1, 'Ordinateur portable' , 120);
-INSERT INTO account VALUES(2, 'Aspirateur Robot' , 200);
-INSERT INTO account VALUES(3, 'Table de Ping Pong' , 400);
+INSERT INTO account VALUES(1, 'FR562039' , 1);
+INSERT INTO account VALUES(2, 'FR4539' , 2);
+INSERT INTO account VALUES(3, 'FR89039' , 1);
