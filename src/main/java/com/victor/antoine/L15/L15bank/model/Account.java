@@ -1,7 +1,6 @@
 package com.victor.antoine.L15.L15bank.model;
 
 import javax.persistence.Entity;
-import lombok.Data;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,9 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Account {
 	
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private @Id @GeneratedValue int id;
     private String iban;
     private int type;
     
@@ -22,9 +19,6 @@ public class Account {
 	}
     
     public Account() {
-		this.id = 1;
-		this.iban = "DE56";
-		this.type = 3;
 	}
 
 	public int getId() {
@@ -45,6 +39,11 @@ public class Account {
 
 	public int getType() {
 		return type;
+	}
+	
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", iban=" + iban + ", type=" + type + "]";
 	}
 
 	public void setType(int type) {

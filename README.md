@@ -12,7 +12,7 @@ https://openclassrooms.com/fr/courses/4668056-construisez-des-microservices/5122
 https://spring.io/guides/gs/spring-boot/
 
 #### Pour Spring sur le web
-https://spring.io/guides/gs/securing-web/
+https://o7planning.org/fr/11545/tutoriel-spring-boot-et-thymeleaf
 https://spring.io/guides/gs/serving-web-content/
 
 #### Spring database

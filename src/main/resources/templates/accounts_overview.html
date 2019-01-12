@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>L15 - Accounts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Welcome back </h1>
+	<h1>Welcome back </h1>
 
-<p>In construction</p>
+	<p th:text="'Hello, ' + ${ibass} + '!'" />
+
+    <table border="1">
+        <tr>
+           <th>ID</th>
+           <th>IBAN</th>
+        </tr>
+        <tr th:each ="person : ${ibass}">
+           <td th:utext="${person.id}">...</td>
+           <td th:utext="${person.iban}">...</td>
+        </tr>
+     </table>
+
 </body>
 </html>
