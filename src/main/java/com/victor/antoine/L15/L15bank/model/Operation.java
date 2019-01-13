@@ -17,8 +17,7 @@ public class Operation {
     private String date;
     private String Label;
 
-    public Operation(int id, String iban_source, String iban_dest, double value, String date, String label) {
-        this.id = id;
+    public Operation(String iban_source, String iban_dest, double value, String date, String label) {
         this.iban_source = iban_source;
         this.iban_dest = iban_dest;
         this.value = value;

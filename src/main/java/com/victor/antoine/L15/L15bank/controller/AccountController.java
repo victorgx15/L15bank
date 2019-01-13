@@ -1,17 +1,16 @@
 package com.victor.antoine.L15.L15bank.controller;
 
-import java.util.List;
+import com.victor.antoine.L15.L15bank.model.Account;
+import com.victor.antoine.L15.L15bank.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.victor.antoine.L15.L15bank.model.Account;
-import com.victor.antoine.L15.L15bank.repository.AccountRepository;
+import java.util.List;
 
 
 @Controller
@@ -51,5 +50,6 @@ public class AccountController {
         acc.save(new Account(acE.getIban(), acE.getType(), userId));
         return "redirect:/accounts_overview";
     }
-	
+
+
 }
