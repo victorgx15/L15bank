@@ -8,24 +8,38 @@ import javax.persistence.Id;
 @Entity
 public class User {
 	
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	private String name, firstName, email;
+	private @Id @GeneratedValue int id;
+	private String lastName, firstName, email, password;
 
-    public User(String name, String firstName, String email) {
-		this.name = name;
+    public User(String lastName, String firstName, String email, String password) {
+		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return name + " " + firstName;
+		return lastName + " " + firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -38,6 +52,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }
