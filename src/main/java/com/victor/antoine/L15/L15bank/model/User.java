@@ -9,12 +9,22 @@ import javax.persistence.Id;
 public class User {
 	
 	private @Id @GeneratedValue int id;
-	private String lastName, firstName, email, password;
+	private String username, lastName, firstName, email, password;
 
-    public User(String lastName, String firstName, String email, String password) {
+    public User(String username, String lastName, String firstName, String email, String password) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
+		this.username=username;
+		this.password=password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Override

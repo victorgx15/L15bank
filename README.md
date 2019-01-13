@@ -18,3 +18,6 @@ https://o7planning.org/en/11793/crud-example-with-spring-boot-rest-and-angularjs
 http://www.springboottutorial.com/spring-boot-and-h2-in-memory-database
 https://spring.io/guides/gs/accessing-data-jpa/
 http://localhost:8080/h2-console
+
+#### Faire un login
+https://o7planning.org/en/11705/create-a-login-application-with-spring-boot-spring-security-jpa
