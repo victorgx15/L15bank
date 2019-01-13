@@ -9,10 +9,12 @@ public class Account {
 	
 	private @Id @GeneratedValue int id;
     private String iban, type;
-    
-    public Account(String iban, String type) {
+    private int user;
+
+	public Account(String iban, String type, int userId) {
 		this.iban = iban;
 		this.type = type;
+		this.user = userId;
 	}
     
     public Account() { }
@@ -22,6 +24,8 @@ public class Account {
 	public void setIban(String iban) { this.iban = iban; }
 	public String getType() { return type; }
 	public void setType(String type) { this.type = type; }
+	public int getUser() { return user; }
+	public void setUser(int userId) { this.user = userId; }
 	
 	@Override
 	public String toString() {

@@ -46,8 +46,9 @@ public class AccountController {
     }
     
     @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
-    public String saAcc(Model model, @ModelAttribute("Account") Account acE) {
-        acc.save(new Account(acE.getIban(), acE.getType()));
+    public String saAcc(Model model, @ModelAttribute("Account") Account acE,
+    		@RequestParam int userId) {
+        acc.save(new Account(acE.getIban(), acE.getType(), userId));
         return "redirect:/accounts_overview";
     }
 	

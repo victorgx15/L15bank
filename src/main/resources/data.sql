@@ -1,3 +1,1 @@
-INSERT INTO Account(id,iban,type) VALUES	(10,'FR562039' , 'Counrat'),
-										(20,'FR4539' , 'Livret'),
-										(30,'FR89039' , 'LDD');
+INSERT INTO Account(id,iban,type,user) VALUES	(10,'FR562039' , 'Counrat',1), (20,'FR4539' , 'Livret',1), (30,'FR89039' , 'LDD',3);
