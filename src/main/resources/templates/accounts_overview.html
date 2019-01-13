@@ -17,6 +17,9 @@
         <tr th:each ="person : ${ibass}">
            <td th:utext="${person.id}">...</td>
            <td th:utext="${person.iban}">...</td>
+           <td ><form th:method="delete" th:action="@{/delAccount}">
+  <input type="hidden" name="ide" th:value="${person.id}" /><button type="submit">Cloturer</button>
+</form></td>
         </tr>
      </table>
 

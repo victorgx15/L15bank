@@ -14,6 +14,8 @@ https://spring.io/guides/gs/spring-boot/
 #### Pour Spring sur le web
 https://o7planning.org/fr/11545/tutoriel-spring-boot-et-thymeleaf
 https://spring.io/guides/gs/serving-web-content/
+https://g00glen00b.be/spring-form-validation/
+https://o7planning.org/en/11793/crud-example-with-spring-boot-rest-and-angularjs
 
 #### Spring database
 http://www.springboottutorial.com/spring-boot-and-h2-in-memory-database
