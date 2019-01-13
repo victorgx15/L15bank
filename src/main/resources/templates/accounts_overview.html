@@ -7,21 +7,31 @@
 <body>
 	<h1>Welcome back </h1>
 
-	<p th:text="'Hello, ' + ${ibass} + '!'" />
+	<p th:text="'Hello, !'" />
 
-    <table border="1">
-        <tr>
-           <th>ID</th>
-           <th>IBAN</th>
-        </tr>
-        <tr th:each ="person : ${ibass}">
-           <td th:utext="${person.id}">...</td>
-           <td th:utext="${person.iban}">...</td>
-           <td ><form th:method="delete" th:action="@{/delAccount}">
-  <input type="hidden" name="ide" th:value="${person.id}" /><button type="submit">Cloturer</button>
-</form></td>
-        </tr>
-     </table>
+  <p>
+    <a th:href="@{/addAccount}">Creer un compte bancaire</a>
+  </p>
+
+  <table border="1">
+      <tr>
+         <th>ID</th>
+         <th>IBAN</th>
+         <th>Type</th>
+         <th>Action</th>
+      </tr>
+      <tr th:each ="person : ${ibass}">
+         <td th:utext="${person.id}">...</td>
+         <td th:utext="${person.iban}">...</td>
+         <td th:utext="${person.type}">...</td>
+         <td >
+          <form th:method="delete" th:action="@{/delAccount}">
+            <input type="hidden" name="ide" th:value="${person.id}" />
+            <button type="submit">Cloturer</button>
+          </form>
+        </td>
+      </tr>
+   </table>
 
 </body>
 </html>

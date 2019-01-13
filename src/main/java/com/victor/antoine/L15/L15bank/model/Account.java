@@ -26,10 +26,10 @@ public class Account {
 	public void setType(String type) { this.type = type; }
 	public int getUser() { return user; }
 	public void setUser(int userId) { this.user = userId; }
-	
+
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", iban=" + iban + ", type=" + type + "]";
+		return "Account [id=" + id + ", iban=" + iban + ", type=" + type + ", user=" + user + "]";
 	}
 	
 }
