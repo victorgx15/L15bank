@@ -1,7 +1,9 @@
 package com.victor.antoine.L15.L15bank.controller;
 
 import com.victor.antoine.L15.L15bank.model.Account;
+import com.victor.antoine.L15.L15bank.model.Operation;
 import com.victor.antoine.L15.L15bank.repository.AccountRepository;
+import com.victor.antoine.L15.L15bank.repository.OperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class AccountController {
 	@Autowired
 	private AccountRepository acc;
 
+    @Autowired
+    private OperationRepository operationRepository;
+
 	//Récupérer la liste des produits
     @RequestMapping(value="/Accounts", method=RequestMethod.GET)
     public List<Account> accountsList() {
@@ -28,7 +33,8 @@ public class AccountController {
     @RequestMapping(value= "/accounts_overview", method = RequestMethod.GET)
     public String showAccounts(Model model){
         //String name = (String) model.get("name");
-        model.addAttribute("ibass", acc.findAll());
+        model.addAttribute("accounts", acc.findAll());
+        model.addAttribute("value", getAccountValue("FR562039"));
         return "accounts_overview";
     }
     
@@ -51,5 +57,13 @@ public class AccountController {
         return "redirect:/accounts_overview";
     }
 
+    public Double getAccountValue(String ibanSrc) {
+        List<Operation> list_op = operationRepository.findByIbanSrc(ibanSrc);
+        double sum = 0;
+        for (Operation op : list_op) {
+            sum = sum + op.getValue();
+        }
+        return sum;
+    }
 
 }

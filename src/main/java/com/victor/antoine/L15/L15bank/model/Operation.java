@@ -1,36 +1,61 @@
 package com.victor.antoine.L15.L15bank.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Operation {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
-    
-    private String iban_source;
+    @Column(name = "IBANSRC")
+    private String ibanSrc;
     private String iban_dest;
-    private double value;
-    private String date;
-    private String Label;
 
-    public Operation(String iban_source, String iban_dest, double value, String date, String label) {
-        this.iban_source = iban_source;
+    public Operation(String ibanSrc, String iban_dest, double value, String date, String label) {
+        this.ibanSrc = ibanSrc;
         this.iban_dest = iban_dest;
         this.value = value;
         this.date = date;
         Label = label;
     }
 
+    public Operation() {
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIban_dest(String iban_dest) {
+        this.iban_dest = iban_dest;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    private double value;
+    private String date;
+    private String Label;
+
+    public void setLabel(String label) {
+        Label = label;
+    }
+
+    public String getIbanSrc() {
+        return ibanSrc;
+    }
+
     public int getId() {
         return id;
     }
 
-    public String getIban_source() {
-        return iban_source;
+    public void setIbanSrc(String ibanSrc) {
+        this.ibanSrc = ibanSrc;
     }
 
     public String getIban_dest() {

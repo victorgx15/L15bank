@@ -16,7 +16,7 @@ public class OperationController {
     @RequestMapping(value = "/createTransfer", method = RequestMethod.POST)
     public String makeTransfer(Model model, @ModelAttribute("operation") Operation op,
                                @RequestParam int userId) {
-        repository.save(new Operation(op.getIban_source(), op.getIban_dest(), op.getValue(), op.getDate(), op.getLabel()));
+        repository.save(new Operation(op.getIbanSrc(), op.getIban_dest(), op.getValue(), op.getDate(), op.getLabel()));
         return "redirect:/accounts_overview";
     }
 }

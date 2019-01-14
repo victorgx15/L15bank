@@ -1,12 +1,8 @@
 package com.victor.antoine.L15.L15bank.model;
 
-import com.victor.antoine.L15.L15bank.repository.OperationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.List;
 
 @Entity
 public class Account {
@@ -15,8 +11,9 @@ public class Account {
     private String iban, type;
     private int user;
 
-	@Autowired
-	OperationRepository operationRepository;
+	/**
+	 * @Autowired private OperationRepository operationRepository;
+	 **/
 
 	public Account(String iban, String type, int userId) {
 		this.iban = iban;
@@ -39,12 +36,7 @@ public class Account {
 		return "Account [id=" + id + ", iban=" + iban + ", type=" + type + ", user=" + user + "]";
 	}
 
-	public double getValue() {
-		List<Operation> list_op = operationRepository.findByIban_source(this.iban);
-		double sum = 0;
-		for (Operation op : list_op) {
-			sum = sum + op.getValue();
-		}
-		return sum;
+	public String getValue() {
+		return Tools.getAccountValue(iban)+"";
 	}
 }
