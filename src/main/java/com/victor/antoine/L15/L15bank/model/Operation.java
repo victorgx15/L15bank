@@ -9,11 +9,12 @@ public class Operation {
     private int id;
     @Column(name = "IBANSRC")
     private String ibanSrc;
-    private String iban_dest;
+    @Column(name = "IBANDEST")
+    private String ibanDest;
 
-    public Operation(String ibanSrc, String iban_dest, double value, String date, String label) {
+    public Operation(String ibanSrc, String ibanDest, double value, String date, String label) {
         this.ibanSrc = ibanSrc;
-        this.iban_dest = iban_dest;
+        this.ibanDest = ibanDest;
         this.value = value;
         this.date = date;
         Label = label;
@@ -26,8 +27,8 @@ public class Operation {
         this.id = id;
     }
 
-    public void setIban_dest(String iban_dest) {
-        this.iban_dest = iban_dest;
+    public String getIbanDest() {
+        return ibanDest;
     }
 
     public void setValue(double value) {
@@ -58,8 +59,8 @@ public class Operation {
         this.ibanSrc = ibanSrc;
     }
 
-    public String getIban_dest() {
-        return iban_dest;
+    public void setIbanDest(String ibanDest) {
+        this.ibanDest = ibanDest;
     }
 
     public double getValue() {

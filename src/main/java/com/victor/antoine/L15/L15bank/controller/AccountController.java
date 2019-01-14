@@ -57,6 +57,7 @@ public class AccountController {
         return "redirect:/accounts_overview";
     }
 
+
     public Double getAccountValue(String ibanSrc) {
         List<Operation> list_op = operationRepository.findByIbanSrc(ibanSrc);
         double sum = 0;

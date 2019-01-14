@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>L15 - Account</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<h1>Solde: 9999 </h1>
+
+<p th:utext="${balance}"/>
+<table border="1">
+    <tr>
+        <th>ibanSrc</th>
+        <th>ibanDest</th>
+        <th>Montant</th>
+        <th>date</th>
+        <th>label</th>
+    </tr>
+    <tr th:each="op : ${operations}">
+        <td th:utext="${op.ibanSrc}">...</td>
+        <td th:utext="${op.ibanDest}">...</td>
+        <td th:utext="${op.value}">...</td>
+        <td th:utext="${op.date}">...</td>
+        <td th:utext="${op.label}">...</td>
+        <td>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,5 +1,7 @@
 package com.victor.antoine.L15.L15bank.model;
 
+import com.victor.antoine.L15.L15bank.controller.AccountController;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,7 +38,8 @@ public class Account {
 		return "Account [id=" + id + ", iban=" + iban + ", type=" + type + ", user=" + user + "]";
 	}
 
-	public String getValue() {
-		return Tools.getAccountValue(iban)+"";
+	public Double getValue() {
+		AccountController accountController = new AccountController();
+		return accountController.getAccountValue(iban);
 	}
 }
