@@ -27,7 +27,7 @@
           <td th:utext="${acc.type}">...</td>
          <td >
              <form th:action="@{/account}" th:method="get">
-                 <input name="ide" th:value="${acc.id}" type="hidden"/>
+                 <input name="iban" th:value="${acc.iban}" type="hidden"/>
                  <button type="submit">Details</button>
              </form>
          </td>

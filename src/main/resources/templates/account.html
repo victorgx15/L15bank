@@ -5,9 +5,14 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
 <body>
-<h1>Solde: 9999 </h1>
 
-<p th:utext="${balance}"/>
+<table border="0">
+    <tr>
+        <th><p>Solde</p></th>
+        <th><p th:utext="${balance}"/></th>
+    </tr>
+</table>
+
 <table border="1">
     <tr>
         <th>ibanSrc</th>

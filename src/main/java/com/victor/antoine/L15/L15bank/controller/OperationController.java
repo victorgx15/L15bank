@@ -3,6 +3,7 @@ package com.victor.antoine.L15.L15bank.controller;
 import com.victor.antoine.L15.L15bank.model.Operation;
 import com.victor.antoine.L15.L15bank.repository.OperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+@Controller
 public class OperationController {
     @Autowired
     private OperationRepository operationRepository;
@@ -23,9 +25,9 @@ public class OperationController {
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String showAccount(Model model, @RequestParam int ide) {
+    public String showAccount(Model model, @RequestParam String iban) {
         model.addAttribute("operations", operationRepository.findAll());
-        model.addAttribute("balance", 55);
+        model.addAttribute("balance", getAccountValue(iban));
         return "account";
     }
 
