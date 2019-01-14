@@ -18,18 +18,25 @@
          <th>ID</th>
          <th>IBAN</th>
          <th>Type</th>
-         <th>Action</th>
+          <th>Action</th>
+          <th>Action</th>
       </tr>
-      <tr th:each ="person : ${ibass}">
-         <td th:utext="${person.id}">...</td>
-         <td th:utext="${person.iban}">...</td>
-         <td th:utext="${person.type}">...</td>
+      <tr th:each="acc : ${accounts}">
+          <td th:utext="${acc.id}">...</td>
+          <td th:utext="${acc.iban}">...</td>
+          <td th:utext="${acc.type}">...</td>
          <td >
-          <form th:method="delete" th:action="@{/delAccount}">
-            <input type="hidden" name="ide" th:value="${person.id}" />
-            <button type="submit">Cloturer</button>
-          </form>
-        </td>
+             <form th:action="@{/account}" th:method="get">
+                 <input name="ide" th:value="${acc.id}" type="hidden"/>
+                 <button type="submit">Details</button>
+             </form>
+         </td>
+          <td>
+              <form th:method="delete" th:action="@{/delAccount}">
+                  <input name="ide" th:value="${acc.id}" type="hidden"/>
+                  <button type="submit">Cloturer</button>
+              </form>
+          </td>
       </tr>
    </table>
 

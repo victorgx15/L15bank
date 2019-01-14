@@ -1,5 +1,7 @@
 package com.victor.antoine.L15.L15bank.model;
 
+import com.victor.antoine.L15.L15bank.controller.AccountController;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +12,10 @@ public class Account {
 	private @Id @GeneratedValue int id;
     private String iban, type;
     private int user;
+
+	/**
+	 * @Autowired private OperationRepository operationRepository;
+	 **/
 
 	public Account(String iban, String type, int userId) {
 		this.iban = iban;
@@ -31,5 +37,9 @@ public class Account {
 	public String toString() {
 		return "Account [id=" + id + ", iban=" + iban + ", type=" + type + ", user=" + user + "]";
 	}
-	
+
+	public Double getValue() {
+		AccountController accountController = new AccountController();
+		return accountController.getAccountValue(iban);
+	}
 }
