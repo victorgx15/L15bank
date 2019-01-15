@@ -8,11 +8,8 @@
 
 <form method="POST"
       th:action="@{/createTransfer}" th:object="${operation}">
-    IBAN du compte source:
-    <input th:field="*{iban_source}" type="text"/>
-    <br/>
     IBAN du compte de destination:
-    <input th:field="*{iban_dest}" type="text"/>
+    <input th:field="*{ibanDest}" type="text"/>
     <br/>
     Montant:
     <input th:field="*{value}" type="text"/>
@@ -23,8 +20,8 @@
     Libellé
     <input th:field="*{label}" type="text"/>
     <br/>
-    <input name="userId" th:value=2 type="hidden"/>
-    <input type="submit" value="Create"/>
+    <input name="ibanSrc" th:value={$account.iban} type="hidden"/>
+    <input type="submit" value="Validate"/>
 </form>
 
 </body>

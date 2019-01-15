@@ -1,6 +1,7 @@
 package com.victor.antoine.L15.L15bank.controller;
 
 import com.victor.antoine.L15.L15bank.model.Operation;
+import com.victor.antoine.L15.L15bank.repository.AccountRepository;
 import com.victor.antoine.L15.L15bank.repository.OperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,28 +17,34 @@ import java.util.List;
 public class OperationController {
     @Autowired
     private OperationRepository operationRepository;
+    
+    @Autowired
+    private AccountRepository accountRepository;
 
     @RequestMapping(value = "/createTransfer", method = RequestMethod.POST)
     public String makeTransfer(Model model, @ModelAttribute("operation") Operation op,
-                               @RequestParam int userId) {
-        operationRepository.save(new Operation(op.getIbanSrc(), op.getIbanDest(), op.getValue(), op.getDate(), op.getLabel()));
-        return "redirect:/accounts_overview";
+                               @RequestParam String iban) {
+        operationRepository.save(new Operation(op.getIbanSrc(), op.getIbanDest(), op.getValue(), op.getDate(), op.getLabel(), "VIREMENT"));
+        return "redirect:/account";
+    }
+    
+    
+    @RequestMapping(value = "/transfer", method = RequestMethod.GET)
+    public String showTransferWindow(Model model, @RequestParam String iban) {
+        model.addAttribute("operations", operationRepository.findAll());
+        model.addAttribute("balance", getAccountValue(iban));
+        model.addAttribute("account", accountRepository.findByIban(iban));
+        return "account";
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String showAccount(Model model, @RequestParam String iban) {
         model.addAttribute("operations", operationRepository.findAll());
         model.addAttribute("balance", getAccountValue(iban));
+        model.addAttribute("account", accountRepository.findByIban(iban));
         return "account";
     }
 
-    /**
-     * @RequestMapping(value= "/accounts_overview", method = RequestMethod.GET)
-     * public String showAccounts(Model model){
-     * model.addAttribute("accounts", acc.findAll());
-     * return "accounts_overview";
-     * }
-     **/
 
     public Double getAccountValue(String ibanSrc) {
         List<Operation> list_op = operationRepository.findByIbanSrc(ibanSrc);

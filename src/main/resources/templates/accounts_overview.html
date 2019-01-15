@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>L15 - Accounts</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
 <body>
 	<h1>Welcome back </h1>
@@ -36,7 +36,7 @@
              </form>
          </td>
           <td>
-              <form th:method="delete" th:action="@{/delAccount}">
+              <form th:action="@{/delAccount}" th:method="delete">
                   <input name="ide" th:value="${acc.id}" type="hidden"/>
                   <button type="submit">Cloturer</button>
               </form>

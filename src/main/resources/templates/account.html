@@ -13,6 +13,7 @@
     </tr>
 </table>
 
+
 <table border="1">
     <tr>
         <th>ibanSrc</th>
@@ -20,6 +21,7 @@
         <th>Montant</th>
         <th>date</th>
         <th>label</th>
+        <th>type</th>
     </tr>
     <tr th:each="op : ${operations}">
         <td th:utext="${op.ibanSrc}">...</td>
@@ -27,6 +29,7 @@
         <td th:utext="${op.value}">...</td>
         <td th:utext="${op.date}">...</td>
         <td th:utext="${op.label}">...</td>
+        <td th:utext="${op.type}">...</td>
         <td>
         </td>
     </tr>

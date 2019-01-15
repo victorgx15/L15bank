@@ -6,5 +6,5 @@ INSERT INTO Account(id, iban, type, fee, interest, user) VALUES
 INSERT INTO user(id, email, password) VALUES
 (1, 'fdis@fkds.fr', 'truc');
 
-INSERT INTO Operation(id, ibanSrc, ibanDest, value, date, Label) VALUES
-(101,'FR562039' , 'FR4539',20,'13/01/20180', 'virement');
+INSERT INTO Operation(id, ibanSrc, ibanDest, value, date, label, type) VALUES
+(101,'FR562039' , 'FR4539',20,'13/01/20180', 'pizza', 'VIREMENT');
