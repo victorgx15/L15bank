@@ -40,7 +40,7 @@ public class OperationController {
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String showAccount(Model model, @RequestParam String iban) {
-        model.addAttribute("operations", operationRepository.findAll());
+        model.addAttribute("operations", operationRepository.findByIbanSrcOrIbanDest(iban, iban));
         model.addAttribute("balance", getAccountValue(iban));
         model.addAttribute("account", accountRepository.findByIban(iban).get(0));
         return "account";
