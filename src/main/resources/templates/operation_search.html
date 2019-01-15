@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>L15 - Search</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+
+<form method="POST"
+      th:action="@{/account}">
+    [Optionnel] IBAN du compte source:
+    <input name="ibanSrc" type="text"/>
+    <br/>
+    [Optionnel] IBAN du compte de destination:
+    <input name="ibanDest" type="text"/>
+    <br/>
+    [Optionnel] Montant:
+    <input name="value" step="0.01" type="number"/>
+    <br/>
+    [Optionnel] date de prise d'effet:
+    <input name="date" type="text"/>
+    <br/>
+    [Optionnel] Libellé
+    <input name="label" type="text"/>
+    <br/>
+    [Optionnel] Type
+    <input name="Type" type="text"/>
+    <br/>
+    <input type="submit" value="Search"/>
+</form>
+
+</body>
+</html>

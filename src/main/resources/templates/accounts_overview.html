@@ -29,7 +29,7 @@
           <td th:utext="${acc.interest}">...</td>
          <td >
              <form th:action="@{/account}" th:method="get">
-                 <input name="iban" th:value="${acc.iban}" type="hidden"/>
+                 <input name="ibanSrc" th:value="${acc.iban}" type="hidden"/>
                  <button type="submit">Details</button>
              </form>
          </td>
