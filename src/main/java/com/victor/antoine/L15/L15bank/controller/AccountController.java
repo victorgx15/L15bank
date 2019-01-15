@@ -70,7 +70,7 @@ public class AccountController {
     	} else {
     		fee = 140; interest = 0;
     	}
-        acc.save(new Account(acE.getIban(), acE.getType(), userId, fee, interest));
+        acc.save(new Account("FR76 69308 00046 00000" + acE.getIban(), acE.getType(), userId, fee, interest));
         return "redirect:/accounts_overview";
     }
 

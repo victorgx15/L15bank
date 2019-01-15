@@ -15,7 +15,7 @@ public class User {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
-		this.password=password;
+		this.password = password;
 	}
     
     public User() {}
