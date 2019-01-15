@@ -44,6 +44,7 @@ public class Operation {
     }
     
     public void setType(String type) {
+        assert (type == "VIREMENT" || type == "CB" || type == "CHEQUE");
         this.type = type;
     }
 

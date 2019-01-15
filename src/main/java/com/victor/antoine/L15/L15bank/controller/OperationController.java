@@ -24,9 +24,9 @@ public class OperationController {
     private AccountRepository accountRepository;
 
     @RequestMapping(value = "/createTransfer", method = RequestMethod.POST)
-    public String makeTransfer(Model model, @ModelAttribute("operation") Operation op) {
-        operationRepository.save(op);
-        return "redirect:/account?iban=" + op.getIbanSrc();
+    public String makeTransfer(Model model, @ModelAttribute("ibanSrc") String ibanSrc, @ModelAttribute("ibanDest") String ibanDest, @ModelAttribute("value") Double value, @ModelAttribute("date") String date, @ModelAttribute("label") String label) {
+        operationRepository.save(new Operation(ibanSrc, ibanDest, value, date, label, "VIREMENT"));
+        return "redirect:/account?iban=" + ibanSrc;
     }
     
     
@@ -45,8 +45,8 @@ public class OperationController {
         model.addAttribute("account", accountRepository.findByIban(iban).get(0));
         return "account";
     }
-
-
+    
+    
     public Double getAccountValue(String ibanSrc) {
         List<Operation> list_op = operationRepository.findByIbanSrcOrIbanDest(ibanSrc, ibanSrc);
         double sum = 0;
