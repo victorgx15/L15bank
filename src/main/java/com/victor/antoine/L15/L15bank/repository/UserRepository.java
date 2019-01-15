@@ -6,6 +6,5 @@ import com.victor.antoine.L15.L15bank.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    User findByUsername(String username);
     User findByEmail(String email);
 }
