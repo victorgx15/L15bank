@@ -24,18 +24,25 @@ public class AccountController {
     @Autowired
     private OperationRepository operationRepository;
 
-	//Récupérer la liste des produits
+	//Methode test
     @RequestMapping(value="/Accounts", method=RequestMethod.GET)
     public List<Account> accountsList() {
         return acc.findAll();
     }
     
+    //Affiche les comptes de tous les clients
     @RequestMapping(value= "/accounts_overview", method = RequestMethod.GET)
     public String showAccounts(Model model){
-        //String name = (String) model.get("name");
         model.addAttribute("accounts", acc.findAll());
         model.addAttribute("value", getAccountValue("FR562039"));
         return "accounts_overview";
+    }
+    
+    //Affiche les comptes d'un client specifique
+    @RequestMapping(value = "/usr_accounts", method = RequestMethod.GET)
+    public String showUserAccounts(Model model, @RequestParam int usr_id) {
+        model.addAttribute("accounts", acc.findByUser(usr_id));
+        return "usr_accounts";
     }
     
     @RequestMapping(value = "/addAccount", method = RequestMethod.GET)
@@ -70,7 +77,7 @@ public class AccountController {
     	} else {
     		fee = 140; interest = 0;
     	}
-        acc.save(new Account(acE.getIban(), acE.getType(), userId, fee, interest));
+        acc.save(new Account("FR76 69308 00046 00000" + acE.getIban(), acE.getType(), userId, fee, interest));
         return "redirect:/accounts_overview";
     }
 
