@@ -32,12 +32,7 @@ public class Account {
 	}
 
 	public Account(String type, double fee, double interest) {
-		String countryCode = "FR76";
-		String bankCode = "40712";
-		String counterCode = "80364";
-		String accountNumber = String.format("%011d", id);
-		String ribKey = String.format("%02d", 97 - ((89 * Integer.parseInt(bankCode) + 15 * Integer.parseInt(counterCode) + 3 * id) % 97));
-		this.iban = countryCode + bankCode + accountNumber + ribKey;
+        this.iban = ibanGenerator(id);
 		this.type = type;
 		this.fee = fee;
 		this.interest = interest;
@@ -66,4 +61,13 @@ public class Account {
 		AccountController accountController = new AccountController();
 		return accountController.getAccountValue(iban);
 	}
+    
+    public String ibanGenerator(int accountid) {
+        String countryCode = "FR76";
+        String bankCode = "40712";
+        String counterCode = "80364";
+        String accountNumber = String.format("%011d", accountid);
+        String ribKey = String.format("%02d", 97 - ((89 * Integer.parseInt(bankCode) + 15 * Integer.parseInt(counterCode) + 3 * accountid) % 97));
+        return countryCode + bankCode + accountNumber + ribKey;
+    }
 }
