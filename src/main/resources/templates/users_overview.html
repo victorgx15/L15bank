@@ -24,8 +24,8 @@
           <td th:utext="${acc.firstName}">...</td>
           <td th:utext="${acc.email}">...</td>
          <td >
-             <form th:action="@{/accounts_overview}" th:method="get">
-                 <input name="ibans" th:value="${acc.id}" type="hidden"/>
+             <form th:action="@{/usr_accounts}" th:method="get">
+                 <input name="usr_id" th:value="${acc.id}" type="hidden"/>
                  <button type="submit">Voir son patrimoine</button>
              </form>
          </td>
