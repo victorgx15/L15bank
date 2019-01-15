@@ -48,10 +48,15 @@ public class OperationController {
 
 
     public Double getAccountValue(String ibanSrc) {
-        List<Operation> list_op = operationRepository.findByIbanSrc(ibanSrc);
+        List<Operation> list_op = operationRepository.findByIbanSrcOrIbanDest(ibanSrc, ibanSrc);
         double sum = 0;
         for (Operation op : list_op) {
-            sum = sum + op.getValue();
+            if (op.getIbanSrc().equals(ibanSrc)) {
+                sum = sum - op.getValue();
+            }
+            if (op.getIbanDest().equals(ibanSrc)) {
+                sum = sum + op.getValue();
+            }
         }
         return sum;
     }
