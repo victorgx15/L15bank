@@ -12,15 +12,23 @@ public class Account {
 	private @Id @GeneratedValue int id;
     private String iban, type;
     private int user;
+    
+    // Les frais de tenue de compte
+    private double fee;
+    
+    // Le taux d'interet
+    private double interest;
 
 	/**
 	 * @Autowired private OperationRepository operationRepository;
 	 **/
 
-	public Account(String iban, String type, int userId) {
+	public Account(String iban, String type, int userId, double fee, double interest) {
 		this.iban = iban;
 		this.type = type;
 		this.user = userId;
+		this.fee = fee;
+		this.interest = interest;
 	}
     
     public Account() { }
@@ -32,6 +40,10 @@ public class Account {
 	public void setType(String type) { this.type = type; }
 	public int getUser() { return user; }
 	public void setUser(int userId) { this.user = userId; }
+	public double getFee() { return fee; }
+	public void setFee(double fee) { this.fee = fee; }
+	public double getInterest() { return interest; }
+	public void setInterest(double interest) { this.interest = interest; }
 
 	@Override
 	public String toString() {

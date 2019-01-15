@@ -53,7 +53,24 @@ public class AccountController {
     @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
     public String saAcc(Model model, @ModelAttribute("Account") Account acE,
     		@RequestParam int userId) {
-        acc.save(new Account(acE.getIban(), acE.getType(), userId));
+    	String accountType = acE.getType();
+    	double fee, interest;
+    	if(accountType.equals("Courant")) {
+    		fee = 25; interest = 0;
+    	} else if (accountType.equals("Livret A")) {
+    		fee = 30; interest = 0.25;
+    	} else if (accountType.equals("LDD")) {
+    		fee = 10; interest = 0.5;
+    	} else if (accountType.equals("PEA")) {
+    		fee = 70; interest = 0;
+    	} else if (accountType.equals("Assurance Vie")) {
+    		fee = 100; interest = 1;
+    	} else if (accountType.equals("Livret Epargne")) {
+    		fee = 40; interest = 0.1;
+    	} else {
+    		fee = 140; interest = 0;
+    	}
+        acc.save(new Account(acE.getIban(), acE.getType(), userId, fee, interest));
         return "redirect:/accounts_overview";
     }
 

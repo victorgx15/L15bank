@@ -18,13 +18,17 @@
          <th>ID</th>
          <th>IBAN</th>
          <th>Type</th>
-          <th>Action</th>
+         <th>Prix</th>
+         <th>Interet</th>
+          <th>Voir</th>
           <th>Action</th>
       </tr>
       <tr th:each="acc : ${accounts}">
           <td th:utext="${acc.id}">...</td>
           <td th:utext="${acc.iban}">...</td>
           <td th:utext="${acc.type}">...</td>
+          <td th:utext="${acc.fee}">...</td>
+          <td th:utext="${acc.interest}">...</td>
          <td >
              <form th:action="@{/account}" th:method="get">
                  <input name="iban" th:value="${acc.iban}" type="hidden"/>
