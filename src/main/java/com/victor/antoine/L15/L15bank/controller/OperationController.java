@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -22,26 +24,25 @@ public class OperationController {
     private AccountRepository accountRepository;
 
     @RequestMapping(value = "/createTransfer", method = RequestMethod.POST)
-    public String makeTransfer(Model model, @ModelAttribute("operation") Operation op,
-                               @RequestParam String iban) {
-        operationRepository.save(new Operation(op.getIbanSrc(), op.getIbanDest(), op.getValue(), op.getDate(), op.getLabel(), "VIREMENT"));
-        return "redirect:/account";
+    public String makeTransfer(Model model, @ModelAttribute("operation") Operation op) {
+        operationRepository.save(op);
+        return "redirect:/account?iban=" + op.getIbanSrc();
     }
     
     
     @RequestMapping(value = "/transfer", method = RequestMethod.GET)
     public String showTransferWindow(Model model, @RequestParam String iban) {
-        model.addAttribute("operations", operationRepository.findAll());
-        model.addAttribute("balance", getAccountValue(iban));
-        model.addAttribute("account", accountRepository.findByIban(iban));
-        return "account";
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        model.addAttribute("operation", new Operation(iban, "VIREMENT"));
+        model.addAttribute("account", accountRepository.findByIban(iban).get(0));
+        return "transfer";
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String showAccount(Model model, @RequestParam String iban) {
         model.addAttribute("operations", operationRepository.findAll());
         model.addAttribute("balance", getAccountValue(iban));
-        model.addAttribute("account", accountRepository.findByIban(iban));
+        model.addAttribute("account", accountRepository.findByIban(iban).get(0));
         return "account";
     }
 

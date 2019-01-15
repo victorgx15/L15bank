@@ -26,6 +26,16 @@ public class Operation {
         this.type = type;
     }
     
+    public Operation(String ibanSrc, String type) {
+        assert (type == "VIREMENT" || type == "CB" || type == "CHEQUE");
+        this.ibanSrc = ibanSrc;
+        this.ibanDest = "";
+        this.value = 0;
+        this.date = "";
+        this.label = "";
+        this.type = type;
+    }
+    
     public Operation() {
     }
     

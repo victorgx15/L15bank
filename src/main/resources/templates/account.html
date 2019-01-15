@@ -13,6 +13,10 @@
     </tr>
 </table>
 
+<form th:action="@{/transfer}" th:method="get">
+    <input name="iban" th:value="${account.iban}" type="hidden"/>
+    <button type="submit">Effectuer un virement</button>
+</form>
 
 <table border="1">
     <tr>

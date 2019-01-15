@@ -20,7 +20,7 @@
     Libellé
     <input th:field="*{label}" type="text"/>
     <br/>
-    <input name="ibanSrc" th:value={$account.iban} type="hidden"/>
+    <input th:field="*{ibanSrc}" th:value="${account.iban}" type="hidden"/>
     <input type="submit" value="Validate"/>
 </form>
 
