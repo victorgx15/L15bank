@@ -8,5 +8,5 @@ import com.victor.antoine.L15.L15bank.model.Account;
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     List<Account> findByIban(String iban);
-    Account findByUser(int user);
+    List<Account> findByUser(int user);
 }
