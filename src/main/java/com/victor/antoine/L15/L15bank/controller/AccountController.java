@@ -34,7 +34,6 @@ public class AccountController {
     @RequestMapping(value= "/accounts_overview", method = RequestMethod.GET)
     public String showAccounts(Model model){
         model.addAttribute("accounts", acc.findAll());
-        model.addAttribute("value", getAccountValue("FR562039"));
         return "accounts_overview";
     }
     
@@ -42,12 +41,14 @@ public class AccountController {
     @RequestMapping(value = "/usr_accounts", method = RequestMethod.GET)
     public String showUserAccounts(Model model, @RequestParam int usr_id) {
         model.addAttribute("accounts", acc.findByUser(usr_id));
+        model.addAttribute("usr_id", usr_id);
         return "usr_accounts";
     }
     
     @RequestMapping(value = "/addAccount", method = RequestMethod.GET)
-    public String showAddAccount(Model model) {
+    public String showAddAccount(Model model, @RequestParam int usr_id) {
         model.addAttribute("account", new Account());
+        model.addAttribute("usr_id", usr_id);
         return "addAccount";
     }
     
@@ -58,9 +59,9 @@ public class AccountController {
     }
     
     @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
-    public String saAcc(Model model, @ModelAttribute("Account") Account acE,
+    public String saAcc(Model model, @RequestParam String type,
     		@RequestParam int userId) {
-    	String accountType = acE.getType();
+    	String accountType = type;
     	double fee, interest;
     	if(accountType.equals("Courant")) {
     		fee = 25; interest = 0;
@@ -77,8 +78,8 @@ public class AccountController {
     	} else {
     		fee = 140; interest = 0;
     	}
-        acc.save(new Account("FR76 69308 00046 00000" + acE.getIban(), acE.getType(), userId, fee, interest));
-        return "redirect:/accounts_overview";
+        acc.save(new Account(type, userId, fee, interest));
+        return "redirect:/usr_accounts?usr_id=" + userId;
     }
 
 

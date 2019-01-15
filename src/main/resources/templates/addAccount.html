@@ -9,13 +9,18 @@
 
 <form th:action="@{/addAccount}"
          th:object="${account}" method="POST">
-         IBAN:
-         <input type="text" th:field="*{iban}" />    
+
+         <select name = "type">
+            <option value = "Courant" selected>Courant</option>
+            <option value = "Livret A">Livret A</option>
+            <option value = "LDD">LDD</option>
+            <option value = "PEA">PEA</option>
+            <option value = "Assurance Vie">Assurance Vie</option>
+            <option value = "Livret Epargne">Livret Epargne</option>
+         </select>
+
          <br/>
-         Type de Compte:
-         <input type="text" th:field="*{type}" />     
-         <br/>
-         <input type="hidden" name="userId" th:value=2 />
+         <input type="hidden" name="userId" th:value="${usr_id}" />
          <input type="submit" value="Create" />
       </form>
 

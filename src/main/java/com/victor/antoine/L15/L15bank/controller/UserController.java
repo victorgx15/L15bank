@@ -52,8 +52,7 @@ public class UserController {
     public String addUser(Model model, @ModelAttribute("User") User acE) {
     	User newUsr = new User(acE.getLastName(), acE.getFirstName(), acE.getEmail(), acE.getPassword());
         usr.save(newUsr);
-        Account newAc = new Account("FR76 69308 00046 00000" + newUsr.getId(),
-        							"Courant", newUsr.getId(), 25, 0);
+        Account newAc = new Account("Courant", newUsr.getId(), 25, 0);
         acc.save(newAc);
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         ops.save(new Operation("L15bank", newAc.getIban(), 80,

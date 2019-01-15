@@ -8,8 +8,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Account {
-	
-	private @Id @GeneratedValue int id;
+
+	private static int generalID = 1;
+	private @Id int id;
     private String iban, type;
     private int user;
     
@@ -28,12 +29,15 @@ public class Account {
 		this.type = type;
 		this.user = userId;
 		this.fee = fee;
+		this.id = generalID++;
 		this.interest = interest;
 	}
 
-	public Account(String type, double fee, double interest) {
-        this.iban = ibanGenerator(id);
+	public Account(String type, int userId, double fee, double interest) {
+		this.id = generalID++;
+		this.iban = ibanGenerator(id);
 		this.type = type;
+		this.user = userId;
 		this.fee = fee;
 		this.interest = interest;
 	}
@@ -66,8 +70,9 @@ public class Account {
         String countryCode = "FR76";
         String bankCode = "40712";
         String counterCode = "80364";
-        String accountNumber = String.format("%011d", accountid);
+        System.out.println(this.id);
+        String accountNumber = String.format("%011d", this.id);
         String ribKey = String.format("%02d", 97 - ((89 * Integer.parseInt(bankCode) + 15 * Integer.parseInt(counterCode) + 3 * accountid) % 97));
-        return countryCode + bankCode + accountNumber + ribKey;
+        return countryCode + " " + bankCode + " " + accountNumber + " " + ribKey;
     }
 }

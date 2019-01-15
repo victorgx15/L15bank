@@ -8,7 +8,12 @@
   <h1>La liste des comptes..</h1>
 
   <p>
-    <a th:href="@{/addAccount}">Creer un compte bancaire</a>
+    <a th:href="@{/addAccount}"></a>
+
+    <form th:method="get" th:action="@{/addAccount}">
+        <input name="usr_id" th:value="${usr_id}" type="hidden"/>
+        <button type="submit">Creer un compte bancaire</button>
+    </form>
   </p>
 
   <table border="1">
