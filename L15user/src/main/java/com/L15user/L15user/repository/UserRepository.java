@@ -1,8 +1,8 @@
-package com.victor.antoine.L15.L15bank.repository;
+package com.L15user.L15user.repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.victor.antoine.L15.L15bank.model.User;
+import com.L15user.L15user.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 

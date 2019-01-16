@@ -1,4 +1,4 @@
-package com.victor.antoine.L15.L15bank;
+package com.L15user.L15user;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class L15bankApplicationTests {
+public class L15userApplicationTests {
 
 	@Test
 	public void contextLoads() {

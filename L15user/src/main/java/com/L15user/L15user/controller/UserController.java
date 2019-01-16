@@ -1,11 +1,7 @@
-package com.victor.antoine.L15.L15bank.controller;
+package com.L15user.L15user.controller;
 
-import com.victor.antoine.L15.L15bank.model.Account;
-import com.victor.antoine.L15.L15bank.model.Operation;
-import com.victor.antoine.L15.L15bank.model.User;
-import com.victor.antoine.L15.L15bank.repository.AccountRepository;
-import com.victor.antoine.L15.L15bank.repository.OperationRepository;
-import com.victor.antoine.L15.L15bank.repository.UserRepository;
+import com.L15user.L15user.model.User;
+import com.L15user.L15user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,7 +43,8 @@ public class UserController {
         usr.deleteById(ide);
         return "redirect:/users_overview";
     }
-    
+
+    /*
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String addUser(Model model, @ModelAttribute("User") User acE) {
     	User newUsr = new User(acE.getLastName(), acE.getFirstName(), acE.getEmail(), acE.getPassword());
@@ -59,5 +56,5 @@ public class UserController {
                 dateFormat.format(new Date()), "Prime de bienvenue", "VIREMENT"));
         return "redirect:/users_overview";
     }
-
+    */
 }
