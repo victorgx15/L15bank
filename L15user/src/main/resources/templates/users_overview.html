@@ -25,10 +25,6 @@
           <td th:utext="${acc.email}">...</td>
          <td >
           <a th:href="@{|/usr_accounts/${acc.id}|}">Patrimoine</a>
-             <form th:action="@{/usr_accounts}" th:method="get">
-                 <input name="user" th:value="${acc.id}" type="hidden"/>
-                 <button type="submit">Voir son patrimoine</button>
-             </form>
          </td>
           <td>
               <form th:method="delete" th:action="@{/delUser}">

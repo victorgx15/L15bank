@@ -3,9 +3,13 @@ package com.L15account.L15account.controller;
 import com.L15account.L15account.model.Account;
 import com.L15account.L15account.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,12 +26,6 @@ public class AccountController {
     //@Autowired
     //private OperationRepository operationRepository;
 
-    //Methode test
-    @RequestMapping(value="/Accounts", method=RequestMethod.GET)
-    public List<Account> accountsList() {
-        return acc.findAll();
-    }
-
     //Affiche les comptes de tous les clients
     @RequestMapping(value= "/accounts_overview", method = RequestMethod.GET)
     public String showAccounts(Model model){
@@ -43,7 +41,6 @@ public class AccountController {
 
     @RequestMapping(value = "/addAccount", method = RequestMethod.GET)
     public String showAddAccount(Model model, @RequestParam int usr_id) {
-        model.addAttribute("account", new Account());
         model.addAttribute("usr_id", usr_id);
         return "addAccount";
     }
@@ -54,11 +51,10 @@ public class AccountController {
         return "redirect:/accounts_overview";
     }
 
-    /*
-    @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
-    public String saAcc(Model model, @RequestParam String type,
-                        @RequestParam int userId) {
-        String accountType = type;
+    // Ajouter un compte (a la maniere SAR)
+    @PostMapping (value = "/addAccount")
+    public ResponseEntity<Account> addAccountToNewUser(@RequestBody Account acb) {
+        String accountType = acb.getType();
         double fee, interest;
         if(accountType.equals("Courant")) {
             fee = 25; interest = 0;
@@ -75,14 +71,15 @@ public class AccountController {
         } else {
             fee = 140; interest = 0;
         }
-        Account account = new Account(type, userId, fee, interest);
+        Account account = new Account(accountType, acb.getUser(), fee, interest);
         acc.save(account);
 
-        operationRepository.save(new Operation("L15Bank", account.getIban(), 0, "Ouverture de compte", "VIREMENT"));
-        return "redirect:/usr_accounts?usr_id=" + userId;
+//        operationRepository.save(new Operation("L15Bank", account.getIban(), 0, "Ouverture de compte", "VIREMENT"));
+        return new ResponseEntity<Account>(account, HttpStatus.CREATED);
+        //return "redirect:/usr_accounts?usr_id=" + userId;
     }
 
-
+/*
     public Double getAccountValue(String ibanSrc) {
         List<Operation> list_op = operationRepository.findByIbanSrc(ibanSrc);
         double sum = 0;

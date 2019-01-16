@@ -21,15 +21,6 @@ public class Account {
      * @Autowired private OperationRepository operationRepository;
      **/
 
-    public Account(String iban, String type, int userId, double fee, double interest) {
-        this.iban = iban;
-        this.type = type;
-        this.user = userId;
-        this.fee = fee;
-        this.id = generalID++;
-        this.interest = interest;
-    }
-
     public Account(String type, int userId, double fee, double interest) {
         this.id = generalID++;
         this.iban = ibanGenerator(id);

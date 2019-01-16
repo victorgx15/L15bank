@@ -4,6 +4,8 @@ import com.L15user.L15user.bean.AccountBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,5 +21,8 @@ public interface AccountProxy {
 	
 	@RequestMapping(value = "/usr_accounts/{user}", method = RequestMethod.GET)
 	List<AccountBean> findByUser(@PathVariable("user") int user);
+	
+	@PostMapping(value = "/addAccount")
+	AccountBean addAccountToNewUser(@RequestBody AccountBean acc);
 
 }

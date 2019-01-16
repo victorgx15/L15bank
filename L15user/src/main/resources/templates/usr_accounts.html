@@ -8,12 +8,7 @@
   <h1>La liste des comptes..</h1>
 
   <p>
-    <a th:href="@{/addAccount}"></a>
-
-    <form th:method="get" th:action="@{/addAccount}">
-        <input name="usr_id" th:value="${user}" type="hidden"/>
-        <button type="submit">Creer un compte bancaire</button>
-    </form>
+    <a th:href="@{|/addAccount/${user}|}">Ouvrir un compte bancaire</a>
   </p>
 
   <table border="1">
@@ -33,10 +28,7 @@
           <td th:utext="${acc.fee}">...</td>
           <td th:utext="${acc.interest}">...</td>
          <td >
-             <form th:action="@{/account}" th:method="get">
-                 <input name="iban" th:value="${acc.iban}" type="hidden"/>
-                 <button type="submit">Details</button>
-             </form>
+             <a th:href="@{|/account/${acc.iban}|}">Détails</a>
          </td>
           <td>
               <form th:method="delete" th:action="@{/delAccount}">

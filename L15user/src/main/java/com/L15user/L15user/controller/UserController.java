@@ -57,24 +57,37 @@ public class UserController {
         return "usr_accounts";
     }
     
-  //Affiche tous les comptes
-    @RequestMapping(value = "/accounts_overview", method = RequestMethod.GET)
-    public String showUserAccounts(Model model) {
-        model.addAttribute("accounts", acc.findAll());
-        return "accounts_overview";
+    // Le client est sur le formulaire d'ouverture d'un compte bancaire
+    @RequestMapping(value = "/addAccount/{usr_id}", method = RequestMethod.GET)
+    public String showOpenAccount(Model model, @PathVariable int usr_id) {
+        model.addAttribute("usr_id", usr_id);
+        return "addAccount";
+    }
+    
+    // Le client ouvre un nouveau compte
+    @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
+    public String openAccount(Model model, @RequestParam int userId, @RequestParam String type) {
+        AccountBean newAcc = new AccountBean();
+        newAcc.setUser(userId);
+        newAcc.setType(type);
+        AccountBean newAB = acc.addAccountToNewUser(newAcc);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        //ops.save(new Operation("L15bank", newAB.getIban(), 80, dateFormat.format(new Date()), "Prime de bienvenue", "VIREMENT"));
+        return "redirect:/usr_accounts/" + userId;
     }
 
-    /*
+   
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String addUser(Model model, @ModelAttribute("User") User acE) {
     	User newUsr = new User(acE.getLastName(), acE.getFirstName(), acE.getEmail(), acE.getPassword());
         usr.save(newUsr);
-        Account newAc = new Account("Courant", newUsr.getId(), 25, 0);
-        acc.save(newAc);
+        AccountBean newAcc = new AccountBean();
+        newAcc.setUser(newUsr.getId());
+        newAcc.setType("Courant");
+        AccountBean newAB = acc.addAccountToNewUser(newAcc);
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        ops.save(new Operation("L15bank", newAc.getIban(), 80,
-                dateFormat.format(new Date()), "Prime de bienvenue", "VIREMENT"));
+        //ops.save(new Operation("L15bank", newAB.getIban(), 80, dateFormat.format(new Date()), "Prime de bienvenue", "VIREMENT"));
         return "redirect:/users_overview";
     }
-    */
+    
 }
