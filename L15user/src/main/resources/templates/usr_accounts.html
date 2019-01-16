@@ -28,7 +28,7 @@
           <td th:utext="${acc.fee}">...</td>
           <td th:utext="${acc.interest}">...</td>
          <td >
-             <a th:href="@{|/account/${acc.iban}|}">Détails</a>
+             <a th:href="@{|/operations/${acc.iban}|}">Détails</a>
          </td>
           <td>
               <form th:method="delete" th:action="@{/delAccount}">

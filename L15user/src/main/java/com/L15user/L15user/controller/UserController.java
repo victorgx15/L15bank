@@ -3,6 +3,7 @@ package com.L15user.L15user.controller;
 import com.L15user.L15user.bean.AccountBean;
 import com.L15user.L15user.model.User;
 import com.L15user.L15user.proxy.AccountProxy;
+import com.L15user.L15user.proxy.OperationProxy;
 import com.L15user.L15user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,10 +28,9 @@ public class UserController {
     @Autowired
     private AccountProxy acc;
     
-    /*
     @Autowired
-    private OperationRepository ops;
-    */
+    private OperationProxy ops;
+
     @RequestMapping(value= "/users_overview", method = RequestMethod.GET)
     public String showUsers(Model model){
         model.addAttribute("users", usr.findAll());
@@ -94,6 +94,14 @@ public class UserController {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         //ops.save(new Operation("L15bank", newAB.getIban(), 80, dateFormat.format(new Date()), "Prime de bienvenue", "VIREMENT"));
         return "redirect:/users_overview";
+    }
+    
+    // Le client regarde la liste des operation d'un de ses comptes
+    @RequestMapping(value = "/operations/{iban}", method = RequestMethod.GET)
+    public String showOperations(Model model, @PathVariable String iban) {
+        model.addAttribute("operations", ops.operationsList(iban));
+        model.addAttribute("accountIBAN", iban);
+        return "operations";
     }
     
 }

@@ -1,6 +1,6 @@
 package com.L15user.L15user.proxy;
 
-import com.L15user.L15user.bean.AccountBean;
+import com.L15user.L15user.bean.OperationBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,16 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Optional;
 
-@FeignClient(name = "account-ms", url = "localhost:9001")
-public interface AccountProxy {
+@FeignClient(name = "operation-ms", url = "localhost:9020")
+public interface OperationProxy {
 	
-	@GetMapping(value = "/usr_accounts/{user}")
-	List<AccountBean> findByUser(@PathVariable("user") int user);
-	
-	@PostMapping(value = "/addAccount")
-	AccountBean addAccountToNewUser(@RequestBody AccountBean acc);
-	
-	@DeleteMapping(value = "/delAccount")
-	void deleAccount(@RequestParam int idd);
+	@GetMapping(value = "/operations/{iban}")
+	List<OperationBean> operationsList(@PathVariable("iban") String iban);
 
 }
