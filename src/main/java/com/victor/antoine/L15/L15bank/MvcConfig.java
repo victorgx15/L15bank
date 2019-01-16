@@ -1,8 +1,6 @@
 package com.victor.antoine.L15.L15bank;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -14,7 +12,8 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/accounts_overview").setViewName("accounts_overview");
-            registry.addViewController("/account").setViewName("account");
+        registry.addViewController("/account").setViewName("account");
+        registry.addViewController("/operation_search").setViewName("operation_search");
     }
 	
 	
