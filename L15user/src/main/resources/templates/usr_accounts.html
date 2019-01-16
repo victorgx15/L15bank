@@ -32,7 +32,8 @@
          </td>
           <td>
               <form th:method="delete" th:action="@{/delAccount}">
-                  <input name="ide" th:value="${acc.id}" type="hidden"/>
+                  <input name="idd" th:value="${acc.id}" type="hidden"/>
+                  <input name="idu" th:value="${acc.user}" type="hidden"/>
                   <button type="submit">Cloturer</button>
               </form>
           </td>

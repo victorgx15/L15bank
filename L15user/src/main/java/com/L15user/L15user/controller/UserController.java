@@ -49,6 +49,12 @@ public class UserController {
         return "redirect:/users_overview";
     }
     
+    @RequestMapping(value = "/delAccount")
+    public String deleteAccount(@RequestParam int idd, @RequestParam int idu) {
+        acc.deleAccount(idd);
+        return "redirect:/usr_accounts/" + idu;
+    }
+    
     //Affiche les comptes d'un client specifique
     @RequestMapping(value = "/usr_accounts/{user}", method = RequestMethod.GET)
     public String findByUser(Model model, @PathVariable int user) {
@@ -76,7 +82,7 @@ public class UserController {
         return "redirect:/usr_accounts/" + userId;
     }
 
-   
+   // Inscription d'un nouveau client
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String addUser(Model model, @ModelAttribute("User") User acE) {
     	User newUsr = new User(acE.getLastName(), acE.getFirstName(), acE.getEmail(), acE.getPassword());

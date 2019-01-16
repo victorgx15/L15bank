@@ -3,6 +3,7 @@ L15 is a Java microservice application... to manage bank accounts
 
 #### Execution du programme:
 - Ouvrir 3 terminals
+- mvn clean package
 - ./mvnw spring-boot:run
 
 #### Tuto Spring en général

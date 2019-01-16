@@ -27,7 +27,7 @@
           <a th:href="@{|/usr_accounts/${acc.id}|}">Patrimoine</a>
          </td>
           <td>
-              <form th:method="delete" th:action="@{/delUser}">
+              <form th:method="DELETE" th:action="@{/delUser}">
                   <input name="ide" th:value="${acc.id}" type="hidden"/>
                   <button type="submit">Desinscrire</button>
               </form>

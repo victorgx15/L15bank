@@ -7,8 +7,7 @@
 <body>
 	<h1>Welcome back </h1>
 
-<form th:action="@{/addUser}"
-         th:object="${user}" method="POST">
+<form th:action="@{/addUser}" th:object="${user}" method="POST">
          Nom: <input type="text" th:field="*{lastName}" /><br/>
          Prénom: <input type="text" th:field="*{firstName}" /><br/>
          Email: <input type="text" th:field="*{email}" /><br/>

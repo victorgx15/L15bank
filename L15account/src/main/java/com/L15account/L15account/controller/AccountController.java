@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,30 +28,20 @@ public class AccountController {
     //@Autowired
     //private OperationRepository operationRepository;
 
-    //Affiche les comptes de tous les clients
-    @RequestMapping(value= "/accounts_overview", method = RequestMethod.GET)
-    public String showAccounts(Model model){
-        model.addAttribute("accounts", acc.findAll());
-        return "accounts_overview";
-    }
-
     //Affiche les comptes d'un client specifique
-    @RequestMapping(value = "/usr_accounts/{user}", method = RequestMethod.GET)
+    @GetMapping(value = "/usr_accounts/{user}")
     public List<Account> findByUser(@PathVariable int user) {
         return acc.findByUser(user);
     }
 
-    @RequestMapping(value = "/addAccount", method = RequestMethod.GET)
+    @GetMapping(value = "/addAccount")
     public String showAddAccount(Model model, @RequestParam int usr_id) {
         model.addAttribute("usr_id", usr_id);
         return "addAccount";
     }
 
-    @RequestMapping(value = "/delAccount", method = RequestMethod.DELETE)
-    public String deleteAccount(@RequestParam int ide) {
-        acc.deleteById(ide);
-        return "redirect:/accounts_overview";
-    }
+    @DeleteMapping(value = "/delAccount")
+    public void deleAccount(@RequestParam int idd) { acc.deleteById(idd); }
 
     // Ajouter un compte (a la maniere SAR)
     @PostMapping (value = "/addAccount")
@@ -73,10 +65,8 @@ public class AccountController {
         }
         Account account = new Account(accountType, acb.getUser(), fee, interest);
         acc.save(account);
-
 //        operationRepository.save(new Operation("L15Bank", account.getIban(), 0, "Ouverture de compte", "VIREMENT"));
         return new ResponseEntity<Account>(account, HttpStatus.CREATED);
-        //return "redirect:/usr_accounts?usr_id=" + userId;
     }
 
 /*
