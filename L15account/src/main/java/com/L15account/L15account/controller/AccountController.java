@@ -5,13 +5,15 @@ import com.L15account.L15account.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class AccountController {
 
     @Autowired
@@ -34,11 +36,9 @@ public class AccountController {
     }
 
     //Affiche les comptes d'un client specifique
-    @RequestMapping(value = "/usr_accounts", method = RequestMethod.GET)
-    public String showUserAccounts(Model model, @RequestParam int usr_id) {
-        model.addAttribute("accounts", acc.findByUser(usr_id));
-        model.addAttribute("usr_id", usr_id);
-        return "usr_accounts";
+    @RequestMapping(value = "/usr_accounts/{user}", method = RequestMethod.GET)
+    public List<Account> findByUser(@PathVariable int user) {
+        return acc.findByUser(user);
     }
 
     @RequestMapping(value = "/addAccount", method = RequestMethod.GET)
