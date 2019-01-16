@@ -66,13 +66,12 @@ public class Account {
 		return accountController.getAccountValue(iban);
 	}
     
-    public String ibanGenerator(int accountid) {
+    public static String ibanGenerator(int accountid) {
         String countryCode = "FR76";
         String bankCode = "40712";
         String counterCode = "80364";
-        System.out.println(this.id);
-        String accountNumber = String.format("%011d", this.id);
+        String accountNumber = String.format("%011d", accountid);
         String ribKey = String.format("%02d", 97 - ((89 * Integer.parseInt(bankCode) + 15 * Integer.parseInt(counterCode) + 3 * accountid) % 97));
-        return countryCode + " " + bankCode + " " + accountNumber + " " + ribKey;
+        return countryCode + " " + bankCode + " " + counterCode + " " + accountNumber + " " + ribKey;
     }
 }
