@@ -19,13 +19,13 @@ public class UserController {
 
     @Autowired
     private UserRepository usr;
-    
+    /*
     @Autowired
     private AccountRepository acc;
     
     @Autowired
     private OperationRepository ops;
-    
+    */
     @RequestMapping(value= "/users_overview", method = RequestMethod.GET)
     public String showUsers(Model model){
         model.addAttribute("users", usr.findAll());

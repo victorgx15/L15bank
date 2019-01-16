@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+//@EnableFeignClients("com.L15user.L15user")
 public class L15userApplication {
 
 	public static void main(String[] args) {
