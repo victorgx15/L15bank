@@ -1,6 +1,9 @@
 package com.victor.antoine.L15.L15bank.model;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 public class Operation {
@@ -22,6 +25,17 @@ public class Operation {
         this.ibanDest = ibanDest;
         this.value = value;
         this.date = date;
+        this.label = label;
+        this.type = type;
+    }
+    
+    public Operation(String ibanSrc, String ibanDest, double value, String label, String type) {
+        assert (type == "VIREMENT" || type == "CB" || type == "CHEQUE");
+        this.ibanSrc = ibanSrc;
+        this.ibanDest = ibanDest;
+        this.value = value;
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        this.date = dateFormat.format(new Date());
         this.label = label;
         this.type = type;
     }

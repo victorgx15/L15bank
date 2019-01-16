@@ -78,7 +78,10 @@ public class AccountController {
     	} else {
     		fee = 140; interest = 0;
     	}
-        acc.save(new Account(type, userId, fee, interest));
+    	Account account = new Account(type, userId, fee, interest);
+        acc.save(account);
+    
+        operationRepository.save(new Operation("L15Bank", account.getIban(), 0, "Ouverture de compte", "VIREMENT"));
         return "redirect:/usr_accounts?usr_id=" + userId;
     }
 

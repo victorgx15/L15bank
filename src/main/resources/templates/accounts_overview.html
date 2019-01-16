@@ -26,6 +26,8 @@
          <td >
              <form th:action="@{/account}" th:method="get">
                  <input name="ibanSrc" th:value="${acc.iban}" type="hidden"/>
+                 <input name="ibanDest" th:value="${acc.iban}" type="hidden"/>
+                 <input name="orSearchFlag" th:value="true" type="hidden"/>
                  <button type="submit">Details</button>
              </form>
          </td>

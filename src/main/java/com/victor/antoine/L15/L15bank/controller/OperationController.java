@@ -27,15 +27,17 @@ public class OperationController {
     private AccountRepository accountRepository;
 
     @RequestMapping(value = "/createTransfer", method = RequestMethod.POST)
-    public String makeTransfer(Model model, @ModelAttribute("ibanSrc") String ibanSrc, @ModelAttribute("ibanDest") String ibanDest, @ModelAttribute("value") Double value, @ModelAttribute("date") String date, @ModelAttribute("label") String label) {
-        operationRepository.save(new Operation(ibanSrc, ibanDest, value, date, label, "VIREMENT"));
+    public String makeTransfer(Model model, @ModelAttribute("ibanSrc") String ibanSrc, @ModelAttribute("ibanDest") String ibanDest, @ModelAttribute("value") Double value, @ModelAttribute("label") String label) {
+        if (ibanSrc.isEmpty() || ibanDest.isEmpty() || value==0) return "redirect:/transfer?iban="+ibanSrc+"&errorMessage='Argument manquant'";
+        operationRepository.save(new Operation(ibanSrc, ibanDest, value, label, "VIREMENT"));
         return "redirect:/account?iban=" + ibanSrc;
     }
     
     
     @RequestMapping(value = "/transfer", method = RequestMethod.GET)
-    public String showTransferWindow(Model model, @RequestParam String iban) {
+    public String showTransferWindow(Model model, @RequestParam String iban, @RequestParam(value = "errorMessage", defaultValue = " ") String errorMessage) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        model.addAttribute("errorMessage", errorMessage);
         model.addAttribute("operation", new Operation(iban, "VIREMENT"));
         model.addAttribute("account", accountRepository.findByIban(iban).get(0));
         return "transfer";
@@ -49,7 +51,7 @@ public class OperationController {
     
     
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String showAccount(Model model, @ModelAttribute("ibanSrc") String ibanSrc, @ModelAttribute("ibanDest") String ibanDest, @ModelAttribute("date") String date, @ModelAttribute("label") String label, @ModelAttribute("type") String type) {
+    public String showAccount(Model model, @ModelAttribute("ibanSrc") String ibanSrc, @ModelAttribute("ibanDest") String ibanDest, @ModelAttribute("date") String date, @ModelAttribute("label") String label, @ModelAttribute("type") String type, @RequestParam(value = "orSearchFlag", defaultValue = "or") boolean orSearchFlag) {
         
         if (ibanSrc.isEmpty() && ibanDest.isEmpty())
             return "redirect:/operation_search?errorMessage='Il faut fournir au moins un iban'";
@@ -60,15 +62,15 @@ public class OperationController {
                 if (flagFirstCondition) {
                     strSQL = strSQL + "IBANSRC='" + ibanSrc + "'";
                     flagFirstCondition = false;
-                } else {
-                    strSQL = strSQL + " AND IBANSRC='" + ibanSrc + "'";
-                }
+                } else if (orSearchFlag) strSQL = strSQL + " OR IBANSRC='" + ibanSrc + "'";
+                  else  strSQL = strSQL + " AND IBANSRC='" + ibanSrc + "'";
             }
             if (!ibanDest.isEmpty()) {
                 if (flagFirstCondition) {
                     strSQL = strSQL + "IBANDEST='" + ibanDest + "'";
                     flagFirstCondition = false;
-                } else {
+                } else if (orSearchFlag) strSQL = strSQL + " OR IBANDEST='" + ibanDest + "'";
+                else {
                     strSQL = strSQL + " AND IBANDEST='" + ibanDest + "'";
                 }
             }
@@ -76,7 +78,8 @@ public class OperationController {
             if (flagFirstCondition) {
                 strSQL = strSQL + "DATE='" + date + "'";
                 flagFirstCondition = false;
-            } else {
+            } else if (orSearchFlag) strSQL = strSQL + " OR DATE='" + date + "'";
+            else {
                 strSQL = strSQL + " AND DATE='" + date + "'";
             }
         }
@@ -84,7 +87,8 @@ public class OperationController {
             if (flagFirstCondition) {
                 strSQL = strSQL + "LABEL='" + label + "'";
                 flagFirstCondition = false;
-            } else {
+            } else if (orSearchFlag) strSQL = strSQL + " OR LABEL='" + label + "'";
+            else {
                 strSQL = strSQL + " AND LABEL='" + label + "'";
             }
         }
@@ -92,10 +96,12 @@ public class OperationController {
             if (flagFirstCondition) {
                 strSQL = strSQL + "TYPE='" + type + "'";
                 flagFirstCondition = false;
-            } else {
+            } else if (orSearchFlag) strSQL = strSQL + " OR TYPE='" + type + "'";
+            else {
                 strSQL = strSQL + " AND TYPE='" + type + "'";
             }
         }
+        System.out.println(strSQL);
         TypedQuery<Operation> query = em.createQuery(strSQL, Operation.class);
         List<Operation> results = query.getResultList();
         if (results.size() == 0) return "redirect:/operation_search?errorMessage='Aucun resultat'";

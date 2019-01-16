@@ -6,6 +6,12 @@
 </head>
 <body>
 
+<table border="0">
+    <tr>
+        <th><p th:utext="${errorMessage}"/></th>
+    </tr>
+</table>
+
 <form method="POST"
       th:action="@{/createTransfer}">
     IBAN du compte de destination:
@@ -13,9 +19,6 @@
     <br/>
     Montant:
     <input name="value" step="0.01" type="number"/>
-    <br/>
-    date de prise d'effet:
-    <input name="date" type="text"/>
     <br/>
     Libellé
     <input name="label" type="text"/>
