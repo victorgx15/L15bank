@@ -8,7 +8,7 @@
 		<version>2.1.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.victor.antoine.L15</groupId>
+	<groupId>com.L15</groupId>
 	<artifactId>L15bank</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>L15bank</name>
@@ -63,7 +63,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.victor.antoine.L15.L15bank.L15bankApplication</mainClass>
+							<mainClass>com.L15.L15bank.L15bankApplication</mainClass>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib</classpathPrefix>
 						</manifest>
