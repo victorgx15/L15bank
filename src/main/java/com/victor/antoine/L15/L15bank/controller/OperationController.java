@@ -20,13 +20,11 @@ import java.util.List;
 @Controller
 public class OperationController {
     @Autowired
+    EntityManager em;
+    @Autowired
     private OperationRepository operationRepository;
-    
     @Autowired
     private AccountRepository accountRepository;
-    
-    @Autowired
-    EntityManager em;
 
     @RequestMapping(value = "/createTransfer", method = RequestMethod.POST)
     public String makeTransfer(Model model, @ModelAttribute("ibanSrc") String ibanSrc, @ModelAttribute("ibanDest") String ibanDest, @ModelAttribute("value") Double value, @ModelAttribute("date") String date, @ModelAttribute("label") String label) {
@@ -43,52 +41,81 @@ public class OperationController {
         return "transfer";
     }
     
-    @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String showAccount(Model model, @RequestParam String ibanScr) {
-        model.addAttribute("operations", operationRepository.findByIbanSrcOrIbanDest(ibanScr, ibanScr));
-        model.addAttribute("balance", getAccountValue(ibanScr));
-        model.addAttribute("account", accountRepository.findByIban(ibanScr).get(0));
-        return "account";
+    @RequestMapping(value = "/operation_search", method = RequestMethod.GET)
+    public String showOperationSearch(Model model, @RequestParam(value = "errorMessage", defaultValue = " ") String errorMessage) {
+        model.addAttribute("errorMessage", errorMessage);
+        return "operation_search";
     }
     
-    @RequestMapping(value = "/account", method = RequestMethod.POST)
-    public String showAccount(Model model, @ModelAttribute("ibanSrc") String ibanSrc, @ModelAttribute("ibanDest") String ibanDest, @ModelAttribute("value") Double value, @ModelAttribute("date") String date, @ModelAttribute("label") String label, @ModelAttribute("type") String type) {
+    
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    public String showAccount(Model model, @ModelAttribute("ibanSrc") String ibanSrc, @ModelAttribute("ibanDest") String ibanDest, @ModelAttribute("date") String date, @ModelAttribute("label") String label, @ModelAttribute("type") String type) {
         
-        String strSQL = "SELECT * FROM Operation";
-        if (!ibanSrc.isEmpty() || !ibanDest.isEmpty() || value != 0 || !date.isEmpty() || !label.isEmpty() || !type.isEmpty()) {
-            strSQL = strSQL + " WHERE";
+        if (ibanSrc.isEmpty() && ibanDest.isEmpty())
+            return "redirect:/operation_search?errorMessage='Il faut fournir au moins un iban'";
+        
+        String strSQL = "SELECT o FROM Operation o WHERE ";
             boolean flagFirstCondition = true;
             if (!ibanSrc.isEmpty()) {
                 if (flagFirstCondition) {
-                    strSQL = strSQL + "IBANSRC=\"" + ibanSrc + "\"";
+                    strSQL = strSQL + "IBANSRC='" + ibanSrc + "'";
+                    flagFirstCondition = false;
                 } else {
-                    strSQL = strSQL + " AND IBANSRC=\"" + ibanSrc + "\"";
+                    strSQL = strSQL + " AND IBANSRC='" + ibanSrc + "'";
                 }
             }
             if (!ibanDest.isEmpty()) {
                 if (flagFirstCondition) {
-                    strSQL = strSQL + "IBANDEST=\"" + ibanDest + "\"";
+                    strSQL = strSQL + "IBANDEST='" + ibanDest + "'";
+                    flagFirstCondition = false;
                 } else {
-                    strSQL = strSQL + " AND IBANDEST=\"" + ibanDest + "\"";
+                    strSQL = strSQL + " AND IBANDEST='" + ibanDest + "'";
                 }
             }
-            
+        if (!date.isEmpty()) {
+            if (flagFirstCondition) {
+                strSQL = strSQL + "DATE='" + date + "'";
+                flagFirstCondition = false;
+            } else {
+                strSQL = strSQL + " AND DATE='" + date + "'";
+            }
         }
-        strSQL = strSQL + ";";
+        if (!label.isEmpty()) {
+            if (flagFirstCondition) {
+                strSQL = strSQL + "LABEL='" + label + "'";
+                flagFirstCondition = false;
+            } else {
+                strSQL = strSQL + " AND LABEL='" + label + "'";
+            }
+        }
+        if (!date.isEmpty()) {
+            if (flagFirstCondition) {
+                strSQL = strSQL + "TYPE='" + type + "'";
+                flagFirstCondition = false;
+            } else {
+                strSQL = strSQL + " AND TYPE='" + type + "'";
+            }
+        }
         TypedQuery<Operation> query = em.createQuery(strSQL, Operation.class);
         List<Operation> results = query.getResultList();
-        
+        if (results.size() == 0) return "redirect:/operation_search?errorMessage='Aucun resultat'";
+        String iban;
+        if (!ibanSrc.isEmpty()) iban = ibanSrc;
+        else iban = ibanDest;
         model.addAttribute("operations", results);
-        model.addAttribute("balance", 999);
-        model.addAttribute("account", accountRepository.findByIban(ibanSrc).get(0));
+        model.addAttribute("balance", getAccountValue(results, iban));
+        model.addAttribute("account", accountRepository.findByIban(iban).get(0));
         return "account";
     }
     
     
     public Double getAccountValue(String ibanSrc) {
-        List<Operation> list_op = operationRepository.findByIbanSrcOrIbanDest(ibanSrc, ibanSrc);
+        return getAccountValue(operationRepository.findByIbanSrcOrIbanDest(ibanSrc, ibanSrc), ibanSrc);
+    }
+    
+    public Double getAccountValue(List<Operation> listOperations, String ibanSrc) {
         double sum = 0;
-        for (Operation op : list_op) {
+        for (Operation op : listOperations) {
             if (op.getIbanSrc().equals(ibanSrc)) {
                 sum = sum - op.getValue();
             }

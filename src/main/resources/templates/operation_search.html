@@ -6,7 +6,13 @@
 </head>
 <body>
 
-<form method="POST"
+<table border="0">
+    <tr>
+        <th><p th:utext="${errorMessage}"/></th>
+    </tr>
+</table>
+
+<form method="GET"
       th:action="@{/account}">
     [Optionnel] IBAN du compte source:
     <input name="ibanSrc" type="text"/>
@@ -14,16 +20,13 @@
     [Optionnel] IBAN du compte de destination:
     <input name="ibanDest" type="text"/>
     <br/>
-    [Optionnel] Montant:
-    <input name="value" step="0.01" type="number"/>
-    <br/>
     [Optionnel] date de prise d'effet:
     <input name="date" type="text"/>
     <br/>
     [Optionnel] Libellé
     <input name="label" type="text"/>
     <br/>
-    [Optionnel] Type
+    [Optionnel] Type (VIREMENT, CB ou CHEQUE)
     <input name="Type" type="text"/>
     <br/>
     <input type="submit" value="Search"/>

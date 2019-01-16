@@ -17,6 +17,9 @@
     <input name="iban" th:value="${account.iban}" type="hidden"/>
     <button type="submit">Effectuer un virement</button>
 </form>
+<form th:action="@{/operation_search}" th:method="get">
+    <button type="submit">Rechercher des operations</button>
+</form>
 
 <table border="1">
     <tr>
