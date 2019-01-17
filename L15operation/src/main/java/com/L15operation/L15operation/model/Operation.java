@@ -1,5 +1,9 @@
 package com.L15operation.L15operation.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,12 +20,13 @@ public class Operation {
     private String label;
     private String type;
     
-    public Operation(String ibanSrc, String ibanDest, double value, String date, String label, String type) {
+    public Operation(String ibanSrc, String ibanDest, double value, String label, String type) {
         assert (type == "VIREMENT" || type == "CB" || type == "CHEQUE");
         this.ibanSrc = ibanSrc;
         this.ibanDest = ibanDest;
         this.value = value;
-        this.date = date;
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        this.date = dateFormat.format(new Date());
         this.label = label;
         this.type = type;
     }

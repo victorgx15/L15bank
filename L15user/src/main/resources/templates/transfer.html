@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>L15 - Transfer</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+
+<form method="POST" th:action="@{/createTransfer}" th:object="${operation}">
+    IBAN du destinataire: <input th:field="*{ibanDest}" type="text"/><br/>
+    Montant: <input th:field="*{value}" step="0.01" type="number"/><br/>
+    Libellé <input th:field="*{label}" type="text"/><br/>
+    <input name="accId" th:value="${accountIBAN}" type="hidden"/>
+    <input type="submit" value="Valider"/>
+</form>
+
+</body>
+</html>
