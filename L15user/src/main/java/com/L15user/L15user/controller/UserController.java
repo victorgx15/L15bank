@@ -31,6 +31,8 @@ public class UserController {
     
     @Autowired
     private OperationProxy ops;
+    
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @RequestMapping(value= "/users_overview", method = RequestMethod.GET)
     public String showUsers(Model model){
@@ -73,13 +75,23 @@ public class UserController {
     
     // Le client ouvre un nouveau compte
     @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
-    public String openAccount(Model model, @RequestParam int userId, @RequestParam String type) {
+    public String openAccount(@RequestParam int userId, @RequestParam String type) {
         AccountBean newAcc = new AccountBean();
         newAcc.setUser(userId);
         newAcc.setType(type);
-        AccountBean newAB = acc.addAccountToNewUser(newAcc);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        //ops.save(new Operation("L15bank", newAB.getIban(), 80, dateFormat.format(new Date()), "Prime de bienvenue", "VIREMENT"));
+        acc.addAccountToNewUser(newAcc);
+        return "redirect:/usr_accounts/" + userId;
+    }
+    
+ // Le client ouvre un nouveau compte
+    @RequestMapping(value = "/editAccount", method = RequestMethod.POST)
+    public String editAccount(@RequestParam int userId, @RequestParam int acid, @RequestParam String type, @RequestParam double fee, @RequestParam double interest) {
+        AccountBean newAcc = new AccountBean();
+        newAcc.setId(acid);
+        newAcc.setInterest(interest);
+        newAcc.setType(type);
+        newAcc.setFee(fee);
+        acc.editAccount(newAcc);
         return "redirect:/usr_accounts/" + userId;
     }
 
@@ -92,24 +104,9 @@ public class UserController {
         newAcc.setUser(newUsr.getId());
         newAcc.setType("Courant");
         AccountBean newAB = acc.addAccountToNewUser(newAcc);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         //ops.save(new Operation("L15bank", newAB.getIban(), 80, dateFormat.format(new Date()), "Prime de bienvenue", "VIREMENT"));
         return "redirect:/users_overview";
     }
-    /*
-    // Le client regarde la liste des operation d'un de ses comptes
-    @RequestMapping(value = "/operations/{iban}", method = RequestMethod.GET)
-    public String showOperations(Model model, @PathVariable String iban) {
-        model.addAttribute("operations", ops.operationsList(iban));
-        model.addAttribute("accountIBAN", iban);
-        
-        double sum = 0;
-        for(OperationBean op : ops.operationsList(iban)) { sum += op.getValue(); }
-        
-        model.addAttribute("balance", sum);
-        return "operations";
-    }
-    */
     
  // Le client est sur le formulaire d'operations de virement
     @RequestMapping(value = "/transfer/{accountIBAN}", method = RequestMethod.GET)

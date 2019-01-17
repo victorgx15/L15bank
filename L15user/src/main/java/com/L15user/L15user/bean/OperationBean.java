@@ -3,17 +3,11 @@ package com.L15user.L15user.bean;
 import javax.persistence.*;
 
 public class OperationBean {
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+
     private int id;
-    @Column(name = "IBANSRC")
-    private String ibanSrc;
-    @Column(name = "IBANDEST")
-    private String ibanDest;
+    private String ibanSrc, ibanDest;
     private double value;
-    private String date;
-    private String label;
-    private String type;
+    private String date, label, type;
     
     public OperationBean(String ibanSrc, String ibanDest, double value, String date, String label, String type) {
         assert (type == "VIREMENT" || type == "CB" || type == "CHEQUE");

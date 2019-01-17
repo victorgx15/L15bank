@@ -18,15 +18,22 @@
          <th>Type</th>
          <th>Frais</th>
          <th>Interet</th>
+         <th>Action</th>
           <th>Voir</th>
           <th>Action</th>
       </tr>
       <tr th:each="acc : ${accounts}">
           <td th:utext="${acc.id}">...</td>
           <td th:utext="${acc.iban}">...</td>
-          <td th:utext="${acc.type}">...</td>
-          <td th:utext="${acc.fee}">...</td>
-          <td th:utext="${acc.interest}">...</td>
+        <form th:method="POST" th:action="@{/editAccount}">
+          <td><input name="type" th:value="${acc.type}" type="text"/></td>
+          <td><input name="fee" th:value="${acc.fee}" type="text"/></td>
+          <td><input name="interest" th:value="${acc.interest}" type="text"/></td>
+          <input name="acid" th:value="${acc.id}" type="hidden"/>
+          <input name="userId" th:value="${acc.user}" type="hidden"/>
+          <td><button type="submit">Modifier</button></td>
+        </form>
+
          <td >
              <form th:method="get" th:action="@{/operations}">
                   <input name="iban" th:value="${acc.iban}" type="hidden"/>
