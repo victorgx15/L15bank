@@ -6,23 +6,24 @@
 </head>
 <body>
 
-<table border="0">
+<table border="0" th:if="${iban!=''}">
     <tr>
         <th><p>Solde</p></th>
         <th><p th:utext="${balance}"/></th>
     </tr>
 </table>
 
-<a th:href="@{|/transfer/${accountIBAN}|}">Effectuer un virement</a>
+<a th:if="${iban!=''}" th:href="@{|/transfer/${iban}|}">Effectuer un virement</a>
+<a th:href="@{/operation_search}">Rechercher des opérations</a>
 
 <table border="1">
     <tr>
-        <th>ibanSrc</th>
-        <th>ibanDest</th>
+        <th>Emetteur</th>
+        <th>Destinataire</th>
         <th>Montant</th>
-        <th>date</th>
-        <th>label</th>
-        <th>type</th>
+        <th>Date</th>
+        <th>Libellé</th>
+        <th>Type</th>
     </tr>
     <tr th:each="op : ${operations}">
         <td th:utext="${op.ibanSrc}">...</td>

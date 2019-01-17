@@ -3,7 +3,6 @@ package com.L15user.L15user.bean;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
 public class AccountBean {
 
     private @Id int id;

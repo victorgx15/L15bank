@@ -8,9 +8,8 @@ import java.util.List;
 
 @Repository
 public interface OperationRepository extends CrudRepository<Operation, Integer> {
-    List<Operation> findByIbanSrc(String ibanSrc);
-
     List<Operation> findByIbanSrcOrIbanDest(String ibanSrc, String ibanDest);
-
+    List<Operation> findByDate(String date);
+    List<Operation> findByType(String type);
     List<Operation> findAll();
 }

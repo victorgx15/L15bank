@@ -2,7 +2,6 @@ package com.L15user.L15user.bean;
 
 import javax.persistence.*;
 
-@Entity
 public class OperationBean {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)

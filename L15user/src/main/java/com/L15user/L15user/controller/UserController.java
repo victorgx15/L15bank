@@ -96,7 +96,7 @@ public class UserController {
         //ops.save(new Operation("L15bank", newAB.getIban(), 80, dateFormat.format(new Date()), "Prime de bienvenue", "VIREMENT"));
         return "redirect:/users_overview";
     }
-    
+    /*
     // Le client regarde la liste des operation d'un de ses comptes
     @RequestMapping(value = "/operations/{iban}", method = RequestMethod.GET)
     public String showOperations(Model model, @PathVariable String iban) {
@@ -109,6 +109,7 @@ public class UserController {
         model.addAttribute("balance", sum);
         return "operations";
     }
+    */
     
  // Le client est sur le formulaire d'operations de virement
     @RequestMapping(value = "/transfer/{accountIBAN}", method = RequestMethod.GET)
@@ -123,8 +124,34 @@ public class UserController {
     public String doingTransfer(@ModelAttribute("Operation") OperationBean acE, @RequestParam String accId) {
     	acE.setIbanSrc(accId);
     	ops.makeTransfer(acE);
-        //ops.save(new Operation("L15bank", newAB.getIban(), 80, dateFormat.format(new Date()), "Prime de bienvenue", "VIREMENT"));
         return "redirect:/users_overview";
+    }
+    
+    // On affiche le formulaire de recherche d'operations
+    @RequestMapping(value = "/operation_search", method = RequestMethod.GET)
+    public String showOperations(Model model) {
+        model.addAttribute("operations", new OperationBean());
+        return "operation_search";
+    }
+    
+	 // On affiche le resultat de la recherche d'operations
+    @RequestMapping(value = "/operations", method = RequestMethod.GET)
+    public String showOperations(Model model, @RequestParam(value = "iban", defaultValue = "") String iban,
+    		@RequestParam(value = "date", defaultValue = "") String date, @RequestParam(value = "type", defaultValue = "") String type) {
+        model.addAttribute("operations", ops.showOps(iban,date,type));
+        model.addAttribute("iban", iban);
+        
+        double sum = 0;
+        for(OperationBean op : ops.showOps(iban,date,type)) {
+        	if(op.getIbanDest().equals(iban))
+        		sum += op.getValue();
+        	else
+        		sum -= op.getValue();
+        }
+        
+        model.addAttribute("balance", sum);
+        
+        return "operations";
     }
     
 }

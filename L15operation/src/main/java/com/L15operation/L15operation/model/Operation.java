@@ -100,6 +100,16 @@ public class Operation {
     public void setLabel(String label) {
         this.label = label;
     }
-
+    
+    @Override
+    public boolean equals(Object o) {
+    	if (o.getClass() != Operation.class) {
+    		return false;
+    	} else {
+    		Operation o1 = (Operation) o;
+    		return o1.getId() == this.id;
+    	}
+    	
+    }
 
 }
