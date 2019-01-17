@@ -102,6 +102,11 @@ public class UserController {
     public String showOperations(Model model, @PathVariable String iban) {
         model.addAttribute("operations", ops.operationsList(iban));
         model.addAttribute("accountIBAN", iban);
+        
+        double sum = 0;
+        for(OperationBean op : ops.operationsList(iban)) { sum += op.getValue(); }
+        
+        model.addAttribute("balance", sum);
         return "operations";
     }
     

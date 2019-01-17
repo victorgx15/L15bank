@@ -18,5 +18,8 @@ public interface OperationProxy {
 	
 	@PostMapping(value = "/createTransfer")
 	OperationBean makeTransfer(@RequestBody OperationBean op);
+	
+	@GetMapping(value = "/operations/{iban}")
+	Double getAccountValue(String ibanSrc);
 
 }

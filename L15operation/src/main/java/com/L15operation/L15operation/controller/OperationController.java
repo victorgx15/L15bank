@@ -20,9 +20,6 @@ import java.util.List;
 public class OperationController {
     @Autowired
     private OperationRepository operationRepository;
-    
-    //@Autowired
-    //private AccountRepository accountRepository;
 
     @RequestMapping(value = "/createTransfer", method = RequestMethod.POST)
     public ResponseEntity<Operation> makeTransfer(@RequestBody Operation op) {
@@ -31,31 +28,15 @@ public class OperationController {
         return new ResponseEntity<Operation>(opss, HttpStatus.CREATED);
     }
     
-    
     @RequestMapping(value = "/transfer/{iban}", method = RequestMethod.GET)
     public String showTransferWindow(Model model, @PathVariable String iban) {
         model.addAttribute("accountIBAN", iban);
         return "transfer";
     }
-	
     
     @RequestMapping(value = "/operations/{iban}", method = RequestMethod.GET)
     public List<Operation> operationsList(@PathVariable String iban) {
         return operationRepository.findByIbanSrcOrIbanDest(iban, iban);
     }
-    
-    
-    public Double getAccountValue(String ibanSrc) {
-        List<Operation> list_op = operationRepository.findByIbanSrcOrIbanDest(ibanSrc, ibanSrc);
-        double sum = 0;
-        for (Operation op : list_op) {
-            if (op.getIbanSrc().equals(ibanSrc)) {
-                sum = sum - op.getValue();
-            }
-            if (op.getIbanDest().equals(ibanSrc)) {
-                sum = sum + op.getValue();
-            }
-        }
-        return sum;
-    }
+
 }
