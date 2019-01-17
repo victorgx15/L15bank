@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>L15 - Accueil Employé</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Welcome employee</h1>
+
+  <p>
+    <a th:href="@{/addUser}">Inscrire un nouveau client</a>
+  </p>
+
+  <table border="1">
+      <tr>
+        <th>Nom</th>
+         <th>Prénom</th>
+         <th>Email</th>
+         <th>Patrimoine</th>
+         <th>Action</th>
+      </tr>
+      <tr th:each="acc : ${users}">
+          <td th:utext="${acc.lastName}">...</td>
+          <td th:utext="${acc.firstName}">...</td>
+          <td th:utext="${acc.email}">...</td>
+         <td >
+          <a th:href="@{|/usr_accounts/${acc.id}|}">Patrimoine</a>
+         </td>
+          <td>
+              <form th:method="DELETE" th:action="@{/delUser}">
+                  <input name="ide" th:value="${acc.id}" type="hidden"/>
+                  <button type="submit">Desinscrire</button>
+              </form>
+          </td>
+      </tr>
+   </table>
+
+</body>
+</html>
