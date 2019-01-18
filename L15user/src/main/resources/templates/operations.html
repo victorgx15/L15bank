@@ -13,18 +13,23 @@
     </tr>
 </table>
 
-<<<<<<< HEAD:L15user/src/main/resources/templates/operations.html
-<a th:if="${iban!=''}" th:href="@{|/transfer/${iban}|}">Effectuer un virement</a>
-<a th:href="@{/operation_search}">Rechercher des opérations</a>
-=======
-<form th:action="@{/transfer}" th:method="get">
-    <input name="iban" th:value="${account.iban}" type="hidden"/>
-    <button type="submit">Effectuer un virement</button>
-</form>
-<form th:action="@{/operation_search}" th:method="get">
-    <button type="submit">Rechercher des operations</button>
-</form>
->>>>>>> master:src/main/resources/templates/account.html
+<a th:if="${iban!=''}" th:href="@{/accounts}">Liste des comptes</a><br>
+<a th:if="${iban!=''}" th:href="@{|/transfer/${iban}|}">Effectuer un virement</a><br>
+
+<form method="GET" th:action="@{/operations}" border="1">
+    <fieldset><legend>Recherche d'operation</legend>
+            IBAN: <input name="iban" type="text"/><br/>
+        Date: <input name="date" type="text"/><br/>
+        Type:
+        <select th:name="type">
+                <option value = "VIREMENT" selected>Virement</option>
+                <option value = "CB">Carte de Paiement</option>
+                <option value = "CHEQUE">Chèque</option>
+             </select><br/>
+        <input type="submit" value="Search"/>
+    </fieldset>
+
+</form><br>
 
 <table border="1">
     <tr>

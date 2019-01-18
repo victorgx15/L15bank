@@ -1,7 +1,5 @@
 package com.L15user.L15user.bean;
 
-import javax.persistence.*;
-
 public class OperationBean {
 
     private int id;

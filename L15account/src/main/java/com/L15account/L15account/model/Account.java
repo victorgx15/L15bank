@@ -9,7 +9,6 @@ public class Account {
     private static int generalID = 1;
     private @Id int id;
     private String iban, type;
-    private int user;
 
     // Les frais de tenue de compte
     private double fee;
@@ -21,11 +20,10 @@ public class Account {
      * @Autowired private OperationRepository operationRepository;
      **/
 
-    public Account(String type, int userId, double fee, double interest) {
+    public Account(String type, double fee, double interest) {
         this.id = generalID++;
         this.iban = ibanGenerator(id);
         this.type = type;
-        this.user = userId;
         this.fee = fee;
         this.interest = interest;
     }
@@ -37,8 +35,6 @@ public class Account {
     public void setIban(String iban) { this.iban = iban; }
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
-    public int getUser() { return user; }
-    public void setUser(int userId) { this.user = userId; }
     public double getFee() { return fee; }
     public void setFee(double fee) { this.fee = fee; }
     public double getInterest() { return interest; }
@@ -46,7 +42,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account [id=" + id + ", iban=" + iban + ", type=" + type + ", user=" + user + "]";
+        return "Account [id=" + id + ", iban=" + iban + ", type=" + type + "]";
     }
 
     public static String ibanGenerator(int accountid) {

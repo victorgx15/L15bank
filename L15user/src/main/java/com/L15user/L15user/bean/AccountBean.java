@@ -1,11 +1,9 @@
 package com.L15user.L15user.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 public class AccountBean {
 
-    private @Id int id;
+    private int id;
     private String iban, type;
     private int user;
 

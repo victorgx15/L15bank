@@ -34,17 +34,6 @@ public class Operation {
         this.type = type;
     }
     
-    public Operation(String ibanSrc, String ibanDest, double value, String label, String type) {
-        assert (type == "VIREMENT" || type == "CB" || type == "CHEQUE");
-        this.ibanSrc = ibanSrc;
-        this.ibanDest = ibanDest;
-        this.value = value;
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        this.date = dateFormat.format(new Date());
-        this.label = label;
-        this.type = type;
-    }
-    
     public Operation(String ibanSrc, String type) {
         assert (type == "VIREMENT" || type == "CB" || type == "CHEQUE");
         this.ibanSrc = ibanSrc;

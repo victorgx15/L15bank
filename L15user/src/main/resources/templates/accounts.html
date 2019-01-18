@@ -7,10 +7,6 @@
 <body>
   <h1>La liste des comptes..</h1>
 
-  <p>
-    <a th:href="@{|/addAccount/${user}|}">Ouvrir un compte bancaire</a>
-  </p>
-
   <table border="1">
       <tr>
          <th>ID</th>
@@ -30,7 +26,6 @@
           <td><input name="fee" th:value="${acc.fee}" type="text"/></td>
           <td><input name="interest" th:value="${acc.interest}" type="text"/></td>
           <input name="acid" th:value="${acc.id}" type="hidden"/>
-          <input name="userId" th:value="${acc.user}" type="hidden"/>
           <td><button type="submit">Modifier</button></td>
         </form>
 
@@ -43,12 +38,25 @@
           <td>
               <form th:method="delete" th:action="@{/delAccount}">
                   <input name="idd" th:value="${acc.id}" type="hidden"/>
-                  <input name="idu" th:value="${acc.user}" type="hidden"/>
                   <button type="submit">Cloturer</button>
               </form>
           </td>
       </tr>
    </table>
+
+     <form th:action="@{/addAccount}" method="POST">
+    <fieldset><legend>Creation de compte</legend>
+      <select th:name="type">
+        <option value = "Courant" selected>Courant</option>
+        <option value = "Livret A">Livret A</option>
+        <option value = "LDD">LDD</option>
+        <option value = "PEA">PEA</option>
+        <option value = "Assurance Vie">Assurance Vie</option>
+        <option value = "Livret Epargne">Livret Epargne</option>
+      </select><br/>
+      <input type="submit" value="Ouvrir un compte" />
+    </fieldset>
+  </form>
 
 </body>
 </html>

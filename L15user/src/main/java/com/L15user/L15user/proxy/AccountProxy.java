@@ -18,8 +18,8 @@ import java.util.Optional;
 @FeignClient(name = "account-ms", url = "localhost:9001")
 public interface AccountProxy {
 	
-	@GetMapping(value = "/usr_accounts/{user}")
-	List<AccountBean> findByUser(@PathVariable("user") int user);
+	@GetMapping(value = "/accounts")
+	List<AccountBean> showAccounts();
 	
 	@PostMapping(value = "/addAccount")
 	AccountBean addAccountToNewUser(@RequestBody AccountBean acc);

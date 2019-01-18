@@ -14,17 +14,10 @@ import java.util.List;
 @FeignClient(name = "operation-ms", url = "localhost:9020")
 public interface OperationProxy {
 	
-	@GetMapping(value = "/operations/{iban}")
-	List<OperationBean> operationsList(@PathVariable("iban") String iban);
-	
 	@GetMapping(value = "/operations")
-	//List<OperationBean> showOps(@ModelAttribute("Operation") OperationBean opera/*, @RequestParam boolean orSearchFlag*/);
 	List<OperationBean> showOps(@RequestParam String iban, @RequestParam String date, @RequestParam String type);
 	
 	@PostMapping(value = "/createTransfer")
 	OperationBean makeTransfer(@RequestBody OperationBean op);
-	
-	@GetMapping(value = "/operations/{iban}")
-	Double getAccountValue(String ibanSrc);
 
 }

@@ -25,13 +25,10 @@ public class AccountController {
 
     //@Autowired
     //private OperationRepository operationRepository;
-
-    //Affiche les comptes d'un client specifique
-    @GetMapping(value = "/usr_accounts/{user}")
-    public List<Account> findByUser(@PathVariable int user) {
-        return acc.findByUser(user);
-    }
-
+    
+    @GetMapping(value = "/accounts")
+    public List<Account> showAccounts() { return acc.findAll(); }
+    
     @GetMapping(value = "/addAccount")
     public String showAddAccount(Model model, @RequestParam int usr_id) {
         model.addAttribute("usr_id", usr_id);
@@ -71,7 +68,7 @@ public class AccountController {
         } else {
             fee = 140; interest = 0;
         }
-        Account account = new Account(accountType, acb.getUser(), fee, interest);
+        Account account = new Account(accountType, fee, interest);
         acc.save(account);
 //        operationRepository.save(new Operation("L15Bank", account.getIban(), 0, "Ouverture de compte", "VIREMENT"));
         return new ResponseEntity<Account>(account, HttpStatus.CREATED);
