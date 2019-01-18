@@ -1,6 +1,8 @@
 package com.L15account.L15account.controller;
 
+import com.L15account.L15account.bean.OperationBean;
 import com.L15account.L15account.model.Account;
+import com.L15account.L15account.proxy.OperationProxy;
 import com.L15account.L15account.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +24,8 @@ public class AccountController {
     @Autowired
     private AccountRepository acc;
 
-    //@Autowired
-    //private OperationRepository operationRepository;
+    @Autowired
+    private OperationProxy opp;
     
     @GetMapping(value = "/accounts")
     public List<Account> showAccounts() { return acc.findAll(); }
@@ -70,7 +71,8 @@ public class AccountController {
         }
         Account account = new Account(accountType, fee, interest);
         acc.save(account);
-//        operationRepository.save(new Operation("L15Bank", account.getIban(), 0, "Ouverture de compte", "VIREMENT"));
+        
+        opp.makeTransfer(new OperationBean("L15Bank", account.getIban(), 80, "Prime d'ouverture de compte", "VIREMENT"));        
         return new ResponseEntity<Account>(account, HttpStatus.CREATED);
     }
 

@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 public class UserController {

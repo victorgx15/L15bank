@@ -1,46 +1,22 @@
-package com.L15operation.L15operation.model;
+package com.L15account.L15account.bean;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.persistence.*;
+public class OperationBean {
 
-@Entity
-public class Operation {
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
-    @Column(name = "IBANSRC")
-    private String ibanSrc;
-    @Column(name = "IBANDEST")
-    private String ibanDest;
+    private String ibanSrc, ibanDest;
     private double value;
-    private String date;
-    private String label;
-    private String type;
+    private String date, label, type;
     
-    public Operation(String ibanSrc, String ibanDest, double value, String label, String type) {
+    public OperationBean(String ibanSrc, String ibanDest, double value, String label, String type) {
         assert (type == "VIREMENT" || type == "CB" || type == "CHEQUE");
         this.ibanSrc = ibanSrc;
         this.ibanDest = ibanDest;
         this.value = value;
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        this.date = dateFormat.format(new Date());
         this.label = label;
         this.type = type;
     }
     
-    public Operation(String ibanSrc, String type) {
-        assert (type == "VIREMENT" || type == "CB" || type == "CHEQUE");
-        this.ibanSrc = ibanSrc;
-        this.ibanDest = "";
-        this.value = 0;
-        this.date = "";
-        this.label = "";
-        this.type = type;
-    }
-    
-    public Operation() {
+    public OperationBean() {
     }
     
     public String getType() {
@@ -99,16 +75,6 @@ public class Operation {
     public void setLabel(String label) {
         this.label = label;
     }
-    
-    @Override
-    public boolean equals(Object o) {
-    	if (o.getClass() != Operation.class) {
-    		return false;
-    	} else {
-    		Operation o1 = (Operation) o;
-    		return o1.getId() == this.id;
-    	}
-    	
-    }
+
 
 }
